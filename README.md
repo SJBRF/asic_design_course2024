@@ -2,7 +2,8 @@
 Labs done as a part of the Physical design course in IIITB  aug-dec 2024 term. 
 
 Lab1: 
-Part A **Compile a C program with gcc compiler, execute it and generate the output.**
+
+Part A **Compile and execute a C program with gcc compiler and generate the output.**
 
 
 
