@@ -121,6 +121,12 @@ Map this command to riscv based assembly language and compile it in Ofast mode u
 
 The number of instructions for executing the code in the ofast mode were found to be 12, less than and optimized as compared to the O1 mode.
 
+From the above results, we can observe:
+
+O1: selects a basic level of optimization which involves short compilation time. It optimizes the code without any major agressive changes.The code size reduction for the given example was 35.  
+
+Ofast: selects an aggressive level of optimization. It gives us maximum performance but at the cost of precision and correctness issues. The code size or the given example was 12.
+
 ------
 **Commands Explaination:**
 
