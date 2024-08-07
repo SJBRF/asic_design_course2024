@@ -11,6 +11,9 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
         *   Ofast mode compilation 
         *   Command explaination   
 
+* #### References
+  	*  https://forgefunder.com/~kunal/riscv_workshop.vdi
+  	*  https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
 
 --------
 **Lab Preparations:** Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
