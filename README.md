@@ -12,8 +12,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
         *   Command explaination   
 
 * #### References
-  	*  https://forgefunder.com/~kunal/riscv_workshop.vdi
-  	*  https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
+  	
 
 --------
 **Lab Preparations:** Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
@@ -144,3 +143,7 @@ The number of instructions for executing the code in the ofast mode were found t
 **sum1ton_O1.o -** This is the object file that you want to disassemble. It contains the compiled machine code generated from the "sum1ton.c" source code file using the specified compiler options.
 
 ------
+**References:**
+
+*  https://forgefunder.com/~kunal/riscv_workshop.vdi
+*  https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
