@@ -139,4 +139,5 @@ The number of instructions for executing the code in the ofast mode were found t
 **-d -** This flag specifies that the disassembly mode should be used. In other words, you are requesting to see the disassembled machine code instructions corresponding to the binary content in the object file.
 
 **sum1ton_O1.o -** This is the object file that you want to disassemble. It contains the compiled machine code generated from the "sum1ton.c" source code file using the specified compiler options.
+
 ------
