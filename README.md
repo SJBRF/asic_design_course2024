@@ -10,7 +10,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
   		*   O1 mode compilation  
         *   Ofast mode compilation 
         *   Command explaination   
-
+* #### Lab 2 : Spike simulation and debugging using RISC-V GNU toolchain
 * #### References
   	
 
@@ -147,6 +147,66 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 **-d -** This flag specifies that the disassembly mode should be used. In other words, you are requesting to see the disassembled machine code instructions corresponding to the binary content in the object file.
 
 **sum1ton_O1.o -** This is the object file that you want to disassemble. It contains the compiled machine code generated from the "sum1ton.c" source code file using the specified compiler options.
+
+--------
+
+**Lab 2: Spike Simulation using RISC-V GNU toolchain**
+
+Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
+The command for running the spike simulation is
+	
+ 	spike -d pk sum1ton_O1.o 
+	
+ 
+<img width="723" alt="Screenshot 2024-08-08 at 9 01 07 AM" src="https://github.com/user-attachments/assets/76ba7651-602b-4890-9d86-d7ec4d819099">  
+
+* **Command Explaination:**
+
+*  **spike -** Spike is a RISC-V ISA simulator that emulates the behavior of a RISC-V processor. It's used to run RISC-V binary programs on a host machine, simulating how those programs would execute on actual RISC-V hardware.  
+
+* **-d** - indicates spike in debug mode. Debug mode enables you to closely monitor and interact with the simulated program's execution, making it useful for analyzing code behavior, identifying issues, and stepping through instructions.  
+
+
+* **pk -** The "proxy kernel" (pk) is a small user-mode runtime environment that provides a basic set of functionalities needed to execute programs in the Spike simulator. It serves as a minimal operating system interface for the simulated environment. The proxy kernel handles basic interactions with the simulated environment, such as managing memory, handling system calls, and providing essential runtime support.
+
+* **until pc 0 10ob0** - continue executing the program until the program counter reaches address 100b0.
+
+* **reg 0 a2 **- check the value stored in register a2. 
+
+
+
+
+* **Debugging the code:**
+
+The command for debugging the assembly code is:
+
+ 	spike -d pk sum1ton_O1.o 
+	#run the program counter (pc) from 0 till the count where main is located
+ 	until pc 0 100b0
+	
+	#check the contents of the a2 register
+	reg 0 a2
+
+  	#press enter to go to next instruction set
+   	#check the updated value of a2
+   	reg 0 a2
+ 	
+
+<img width="727" alt="Screenshot 2024-08-08 at 9 08 50 AM" src="https://github.com/user-attachments/assets/54748cde-801e-4f82-935b-95707eb42611">    
+
+
+![contents update a2](https://github.com/user-attachments/assets/e9ffd4b5-4377-404f-a9ed-2fc78ed5305c)    
+
+
+![contents update a0](https://github.com/user-attachments/assets/66bbfe57-8c91-4f13-b961-5797055ef7c1)  
+
+
+
+Similarly the debug checks can be run for other instructions. for example the stack pointer can be verified by checking the values stored in sp before and after execution of the instruction  
+
+![sp update](https://github.com/user-attachments/assets/d24e7b3f-b1d6-4b27-a991-0a9d6fbf2a50)    
+
+
 
 ------
 **References:**
