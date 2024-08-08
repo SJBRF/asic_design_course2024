@@ -11,6 +11,8 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
         *   Ofast mode compilation 
         *   Command explaination   
 * #### Lab 2 : Simulation and debugging of a C program using Spike
+* #### Lab 3 : RISC-V Instruction identification
+* #### Lab 4 : Functional simulation of RISC-V Core
 * #### References
   	
 
@@ -210,6 +212,11 @@ The command for debugging the assembly code is:
 Similarly the debug checks can be run for other instructions. for example the stack pointer can be verified by checking the values stored in sp before and after execution of the instruction  
 
 ![sp update](https://github.com/user-attachments/assets/d24e7b3f-b1d6-4b27-a991-0a9d6fbf2a50)    
+
+------
+**Lab 4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
+
+We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is : [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
 
 
 
