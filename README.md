@@ -10,7 +10,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
   		*   O1 mode compilation  
         *   Ofast mode compilation 
         *   Command explaination   
-* #### Lab 2 : Spike simulation and debugging using RISC-V GNU toolchain
+* #### Lab 2 : Simulation and debugging of a C program using Spike
 * #### References
   	
 
@@ -150,9 +150,14 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 
 --------
 
-**Lab 2: Spike Simulation using RISC-V GNU toolchain**
+**Lab 2: Simulation using Spike simulator**
 
-Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
+
+Task: Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
+
+A RISC-V ISA is a simulator, enabling the testing and analysis of RISC-V programs without the need for actual hardware.
+Spike is a free, open-source C++ simulator for the RISC-V ISA that models a RISC-V core and cache system. It can be used to run programs and a Linux kernel, and can be a starting point for running software on a RISC-V target.   
+
 The command for running the spike simulation is
 	
  	spike -d pk sum1ton_O1.o 
@@ -171,12 +176,12 @@ The command for running the spike simulation is
 
 * **until pc 0 10ob0** - continue executing the program until the program counter reaches address 100b0.
 
-* **reg 0 a2 **- check the value stored in register a2. 
+* **reg 0 a2**- check the value stored in register a2. 
 
 
 
 
-* **Debugging the code:**
+* **Debugging the code using Spike:**
 
 The command for debugging the assembly code is:
 
