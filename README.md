@@ -7,9 +7,9 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 - [Lab1 : Introduction to RISC-V ISA and GNU compiler toolchain](#Lab1)
   	- [Task1 : Illustration of GCC GNU compiler](#Task1)
   	- [Task2 : Illustration of RISC-V GNU compiler](#Task2)  
-  		*   O1 mode compilation  
-        	*   Ofast mode compilation 
-        	*   Command explaination   
+  		- [O1 mode compilation](#a.)  
+        	- [Ofast mode compilation](#b.) 
+        	- [Command explaination](#Command)   
 - [Lab2 : Simulation and debugging of a C program using Spike](#Lab2)
 - [Lab 3 : RISC-V Instruction identification](#Lab3)
 - [Lab 4 : Functional simulation of RISC-V Core](#Lab4)
@@ -17,11 +17,11 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
   	
 
 --------
-## Lab Preparations: Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
+#### Lab Preparations: Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
 
 
 
-## Lab1: **Introduction to RISC-V ISA and GNU compiler toolchain**
+#### Lab1: **Introduction to RISC-V ISA and GNU compiler toolchain**
 
 
 **Task1:**
@@ -214,7 +214,11 @@ Similarly the debug checks can be run for other instructions. for example the st
 ![sp update](https://github.com/user-attachments/assets/d24e7b3f-b1d6-4b27-a991-0a9d6fbf2a50)    
 
 ------
-**Lab3: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
+
+**Lab3: RISC-V Instruction identification**
+
+----
+**Lab4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
 
 We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is : [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
 
