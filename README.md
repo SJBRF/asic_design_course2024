@@ -3,28 +3,28 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 
 # Table of contents
 -----
-* #### Lab Preparations
-* #### Lab 1 : Introduction to RISC-V ISA and GNU compiler toolchain
-    * Task1 : Illustration of GCC GNU compiler
-  	* Task2 : Illustration of RISC-V GNU compiler  
+- [Lab Preparations](#Lab)
+- [Lab1 : Introduction to RISC-V ISA and GNU compiler toolchain](#Lab1)
+  	- [Task1 : Illustration of GCC GNU compiler](#Task1)
+  	- [Task2 : Illustration of RISC-V GNU compiler](#Task2)  
   		*   O1 mode compilation  
-        *   Ofast mode compilation 
-        *   Command explaination   
-* #### Lab 2 : Simulation and debugging of a C program using Spike
-* #### Lab 3 : RISC-V Instruction identification
-* #### Lab 4 : Functional simulation of RISC-V Core
-* #### References
+        	*   Ofast mode compilation 
+        	*   Command explaination   
+- [Lab2 : Simulation and debugging of a C program using Spike](#Lab2)
+- [Lab 3 : RISC-V Instruction identification](#Lab3)
+- [Lab 4 : Functional simulation of RISC-V Core](#Lab4)
+- [References](#References)
   	
 
 --------
-**Lab Preparations:** Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
+## Lab Preparations: Create GitHub repository to manage the progress. Install GCC and RISC-V toolchain using VDI shared over whatsapp group. 
 
 
 
-**Lab1-06/08/2024:** **Introduction to RISC-V ISA and GNU compiler toolchain**
+## Lab1: **Introduction to RISC-V ISA and GNU compiler toolchain**
 
 
-**Task 1:**
+**Task1:**
 
 **Compile and execute a C program with GCC GNU compiler toolchain and generate the output.**
 **Code:**
@@ -67,7 +67,7 @@ The code can be edited via leafpad editor in the terminal window. The command fo
 
 ----
 
-**Task 2:**
+**Task2:**
 
 **Compile and execute the same C program with RISC-V GNU compiler toolchain, and compare the generated output with the output of Lab1 Task A.**
 
@@ -152,7 +152,7 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 
 --------
 
-**Lab 2: Simulation using Spike simulator**
+**Lab2: Simulation using Spike simulator**
 
 
 Task: Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
@@ -214,7 +214,7 @@ Similarly the debug checks can be run for other instructions. for example the st
 ![sp update](https://github.com/user-attachments/assets/d24e7b3f-b1d6-4b27-a991-0a9d6fbf2a50)    
 
 ------
-**Lab 4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
+**Lab3: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
 
 We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is : [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
 
