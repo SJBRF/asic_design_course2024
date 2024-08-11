@@ -522,8 +522,25 @@ The J-type instructions are often used to perform jump to the desired memory loc
 	func7 = 0000000
 	32 bits instruction :0000000_00010_01011_001_01111_0110011
  	```
-	 	
+  
+	   | Instruction | Type | Standard ISA Code |
+	   |:-----------:|:----:|:-----------------:|
+	   |ADD r7, r8, r9 | R | 0x009403B3 |
+	   |SUB r9, r7, r8 | R | 0x408383B3 |
+	   |AND r8, r7, r9 | R | 0x0093F433 |
+	   |OR  r8, r8, r5 | R | 0x00546433 |
+	   |XOR r8, r7, r4 | R | 0x0043C433 |
+	   |SLT r10, r2, r4| R | 0x00412533 |
+	   |ADDI r12, r3, 5| I | 0x00518613 |
+	   |SW r3, r1, 4   | S | 0x0030A223 |
+	   |SRL r16, r11, r2 | R | 0x0025D833 |
+	   |BNE r0, r1, 20 | B | 0x02101463 |
+	   |BEQ r0, r0, 15 | B | 0x00000F63|
+	   |LW r13, r11, 2 | I | 0x0025A683 |
+	   |SLL r15, r11, r2 | R | 0x002597B3|
+  
 
+   
 ----
 **Lab4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
 
@@ -569,6 +586,89 @@ The GTKWave will be opened and following window will appear
 
 	<img width="937" alt="Screenshot 2024-08-11 at 12 06 13 PM" src="https://github.com/user-attachments/assets/48614ab2-c8a8-4502-98c4-2b97511a3151">   
 
+As shown in the figure below, all the instructions in the given verilog file is hard-coded. Hard-coded means that instead of following the RISCV specifications bit pattern, the designer has hard-coded each instructions based on their own pattern. Hence the 32-bits instruction that we generated in Task-2 will not match with the given instruction.
+
+```verilog
+	always @(posedge RN) begin
+	    //NPC<= 32'd0;
+	MEM[0] <= 32'h02208300;         // add r6,r1,r2.(i1)
+	MEM[1] <= 32'h02209380;         //sub r7,r1,r2.(i2)
+	MEM[2] <= 32'h0230a400;         //and r8,r1,r3.(i3)
+	MEM[3] <= 32'h02513480;         //or r9,r2,r5.(i4)
+	MEM[4] <= 32'h0240c500;         //xor r10,r1,r4.(i5)
+	MEM[5] <= 32'h02415580;         //slt r11,r2,r4.(i6)
+	MEM[6] <= 32'h00520600;         //addi r12,r4,5.(i7)
+	MEM[7] <= 32'h00209181;         //sw r3,r1,2.(i8)
+	MEM[8] <= 32'h00208681;         //lw r13,r1,2.(i9)
+	MEM[9] <= 32'h00f00002;         //beq r0,r0,15.(i10)
+	MEM[25] <= 32'h00210700;         //add r14,r2,r2.(i11)
+	//MEM[27] <= 32'h01409002;         //bne r0,r1,20.(i12)
+	//MEM[49] <= 32'h00520601;         //addi r12,r4,5.(i13)
+	//MEM[50] <= 32'h00208783;         //sll r15,r1,r2(2).(i14)
+	//MEM[51] <= 32'h00271803;         //srl r16,r14,r2(2).(i15) */
+```
+Following are the differences between standard RISCV ISA and the Instruction Set given in the reference repository:
+
+| Operation | Standard RISCV ISA | Hardcoded ISA |
+|:---------:|:------------------:|:-------------:|
+| ADD R6, R2, R1 | 32'h00110333 | 32'h02208300 |
+| SUB R7, R1, R2 | 32'h402083b3	| 32'h02209380 |
+| AND R8, R1, R3 | 32'h0030f433	| 32'h0230a400 |
+| OR R9, R2, R5	 | 32'h005164b3	| 32'h02513480 |
+| XOR R10, R1, R4| 32'h0040c533	| 32'h0240c500 |
+| SLT R1, R2, R4 | 32'h0045a0b3	| 32'h02415580 |
+| ADDI R12, R4, 5| 32'h004120b3	| 32'h00520600 |
+| BEQ R0, R0, 15 | 32'h00000f63	| 32'h00f00002 |
+| SW R3, R1, 2	 | 32'h0030a123	| 32'h00209181 |
+| LW R13, R1, 2	 | 32'h0020a683	| 32'h00208681 |
+| SRL R16, R14, R2 | 32'h0030a123 | 32'h00271803 |
+| SLL R15, R1, R2 | 32'h002097b3 | 32'h00208783 |
+
+
+The simulation output waveforms for various instructions shown in the code above are given below:
+	
+```
+1. Instruction: ADD R6, R2, R1 
+```   
+ 
+<img width="1518" alt="ADD" src="https://github.com/user-attachments/assets/1c6b6c40-817d-45d2-94b7-a04301333e6a">    
+
+```
+2. Instruction: SUB R7, R1, R2
+```     
+
+<img width="1453" alt="SUB" src="https://github.com/user-attachments/assets/47bfca43-e16a-4adb-871c-d126c506265d">         
+
+	
+```
+3. Instruction: AND R8, R1, R3
+```     
+  	
+![AND](https://github.com/user-attachments/assets/11654c0b-dc3a-4c19-bbf3-5987da3122dd)         
+
+```
+4. Instruction: OR R9, R2, R5
+```     
+   	
+<img width="1433" alt="OR" src="https://github.com/user-attachments/assets/487d911e-de83-468b-a4ce-4bc74f26f16e">    
+
+```
+5. Instruction: XOR R10, R1, R4
+```     
+     	
+<img width="1442" alt="XOR" src="https://github.com/user-attachments/assets/4edfc938-0cdc-4008-8b4d-3a528927bd67">     
+
+```
+6. Instruction: SLT R1, R2, R4
+```     
+       	
+<img width="1514" alt="SLT" src="https://github.com/user-attachments/assets/89ba949e-523f-4173-964f-59f1b976df3c">     
+
+```
+7. Instruction: ADDI R12, R4, 5
+```    
+	
+ <img width="1481" alt="ADDI" src="https://github.com/user-attachments/assets/08516ff8-5ebf-4ce9-b35a-63556530c875">     
 
 
 
