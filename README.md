@@ -527,7 +527,48 @@ The J-type instructions are often used to perform jump to the desired memory loc
 ----
 **Lab4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
 
-We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is : [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
+ We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is :   [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
+
+* **RISC-V RV32I**
+  
+This lab provides an insight into the working of a few important instructions of the instruction set of a Single cycle Reduced Instruction Set Computer - Five(RISC-V) Instruction Set Architecture suitable for use across wide-spectrum of Applications from low power embedded devices to high performance Cloud based Server processors. The base RISC-V is a 32-bit processor with 31 general-purpose registers, so all the instructions are 32-bit long. Some Applications where the RISC-V processors have begun to make some significant threads are in Artificial intelligence and machine learning, Embedded systems, Ultra Low power processing systems etc.
+
+* **Block Diagram of RISC-V RV32I**
+
+	![181293948-beb8622c-7696-4b06-b6c9-eeab9b8ab9d3](https://github.com/user-attachments/assets/b176cf60-5e40-451f-a58d-ab906f9925c5)   
+
+* **Instruction Set of RISC-V RV32I**
+  
+	![181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c](https://github.com/user-attachments/assets/82d9d234-b27b-4e8e-a3e5-4354bc4bce84)  
+
+* **Functional Simulation of RISC-V**
+  
+Steps to perform functional simulation of RISC-V
+
+1. Create a new directory with your name mkdir <your_name>
+	mkdir <priyanka>
+
+2. Create two files by using touch command as name_rv32i.v and name_rv32i_tb.v
+   	priyanka_rv32i.v
+   	priyanka_rv32i_tb.v
+
+3. Copy the code from the reference github repo and paste it in your verilog and testbench files
+
+4. To run and simulate the verilog code, enter the following command:
+
+	```
+ 	$ iverilog -o priyanka_rv32i priyanka_rv32i.v priyanka_rv32i_tb.v
+	$ ./priytanka_rv32i
+ 	```
+To see the simulation waveform in GTKWave, enter the following command:
+
+	$ gtkwave priyanka_rv32i.vcd
+  
+ 
+The GTKWave will be opened and following window will appear  
+
+	<img width="937" alt="Screenshot 2024-08-11 at 12 06 13 PM" src="https://github.com/user-attachments/assets/48614ab2-c8a8-4502-98c4-2b97511a3151">   
+
 
 
 
