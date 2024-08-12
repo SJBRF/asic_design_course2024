@@ -668,8 +668,14 @@ The simulation output waveforms for various instructions shown in the code above
 7. Instruction: ADDI R12, R4, 5
 ```    
 	
- <img width="1481" alt="ADDI" src="https://github.com/user-attachments/assets/08516ff8-5ebf-4ce9-b35a-63556530c875">     
+ <img width="1481" alt="ADDI" src="https://github.com/user-attachments/assets/08516ff8-5ebf-4ce9-b35a-63556530c875">      
 
+```
+8. Instruction: BEQ R0, R0, 15
+```     
+
+
+![BEQ](https://github.com/user-attachments/assets/7502d23f-73c7-4ee4-a6de-a60d0cc5e9cf)
 
 
 ------
