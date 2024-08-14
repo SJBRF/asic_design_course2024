@@ -10,10 +10,10 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
   		- [O1 mode compilation](#a.-O1-Mode-compilation)  
         	- [Ofast mode compilation](#b.-Ofast-mode-compilation) 
         	- [Command explaination](#Commands-Explaination)   
-3. [Lab2 : Simulation and debugging of a C program using Spike](#Lab2:-Simulation-using-Spike-simulator)
-4. [Lab3 : RISC-V Instruction identification](#Lab3:-RISCV-Instruction-identification)
+3. [Lab2 : Simulation and debugging of a C program using Spike](#Lab2-Simulation-using-Spike-simulator)
+4. [Lab3 : RISC-V Instruction identification](#Lab3-RISCV-Instruction-identification)
 5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
-6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5:-=Custom-real-life-application-C-Code-and-do-the-following:)
+6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Custom-real-life-application-C-Code-and-do-the-following:)
 - [References](#References)
   	
 
@@ -155,7 +155,7 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 
 --------
 
-## Lab2: Simulation using Spike simulator:
+## Lab2 Simulation using Spike simulator:
 
 
 Task: Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
@@ -218,7 +218,7 @@ Similarly the debug checks can be run for other instructions. for example the st
 
 ------
 
-## Lab3: RISCV Instruction identification:
+## Lab3 RISCV Instruction identification:
 
 **WHAT IS RISC-V?**
 RISC-V is an open-source instruction set architecture (ISA) that allows developers to develop processors for specific applications.
@@ -684,7 +684,7 @@ The simulation output waveforms for various instructions shown in the code above
 
 -----------     
 
-## Lab5: Custom real life application C Code and do the following:
+## Lab5 Custom real life application C Code and do the following:
 * Write compilable C Code for the same
 * Compile and simulate it using GCC and upload the screenshot for the output
 * Compile and simulate the same using RISC-V GCC compiler and Spike simulator and upload the screenshot
