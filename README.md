@@ -24,7 +24,7 @@ Create GitHub repository to manage the progress. Install GCC and RISC-V toolchai
 
 
 
-## Lab1: Introduction to RISCV ISA and GNU compiler toolchain
+## Lab1: Introduction to RISCV ISA and GNU compiler toolchain:
 
 
 #### Task1:
@@ -155,7 +155,7 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 
 --------
 
-## Lab2: Simulation using Spike simulator
+## Lab2: Simulation using Spike simulator:
 
 
 Task: Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
@@ -218,7 +218,7 @@ Similarly the debug checks can be run for other instructions. for example the st
 
 ------
 
-## Lab3: RISCV Instruction identification
+## Lab3: RISCV Instruction identification:
 
 **WHAT IS RISC-V?**
 RISC-V is an open-source instruction set architecture (ISA) that allows developers to develop processors for specific applications.
