@@ -13,6 +13,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 - [Lab2 : Simulation and debugging of a C program using Spike](#Lab2)
 - [Lab 3 : RISC-V Instruction identification](#Lab3)
 - [Lab 4 : Functional simulation of RISC-V Core](#Lab4)
+- [Lab 5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5)
 - [References](#References)
   	
 
@@ -677,6 +678,31 @@ The simulation output waveforms for various instructions shown in the code above
 
 ![BEQ](https://github.com/user-attachments/assets/7502d23f-73c7-4ee4-a6de-a60d0cc5e9cf)
 
+-----------     
+
+**Lab5: Choose a real life application and do the following:**
+* Write compilable C Code for the same
+* Compile and simulate it using GCC and upload the screenshot for the output
+* Compile and simulate the same using RISC-V GCC compiler and Spike simulator and upload the screenshot
+* Compare and validate both the outputs
+
+  * Application choosen:
+    
+    **A Polynomial Multiplier which takes two polynomials A and B as user inputs and generates the multiplication output of A and B**
+   
+    The GCC compiler output of the code is shown below
+    
+
+    ![Pasted image](https://github.com/user-attachments/assets/596e6a65-f74d-4cc5-ad3d-202a34e723d3)
+    
+
+    The RISCV Spike simulator and the comparison of both the outputs is shown below:
+    
+
+    ![Pasted image 1](https://github.com/user-attachments/assets/f28597c3-4c77-44e3-82c3-6d16f298c056)
+    
+
+    The simulated output with both GCC and RISC-V GCC compilers were found to be same for the given application for same set of user inputs.
 
 ------
 **References:**
