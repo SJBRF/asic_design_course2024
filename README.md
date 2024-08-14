@@ -699,10 +699,10 @@ The simulation output waveforms for various instructions shown in the code above
     The RISCV Spike simulator and the comparison of both the outputs is shown below:
     
 
-    ![Pasted image 1](https://github.com/user-attachments/assets/f28597c3-4c77-44e3-82c3-6d16f298c056)
-    
+    ![Pasted image 1](https://github.com/user-attachments/assets/71610743-62c2-4eb6-8698-a5b54d987657)      
 
-    The simulated output with both GCC and RISC-V GCC compilers were found to be same for the given application for same set of user inputs.
+
+    The simulated output O1 with GCC and O2 with RISC-V GCC compilers were found to be same for the given application for same set of user inputs.
 
 ------
 **References:**
