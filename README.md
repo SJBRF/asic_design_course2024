@@ -4,16 +4,16 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 # Table of contents
 -----
 1. [Lab Preparations](#Lab-Preparations)
-2. [Lab1 : Introduction to RISC-V ISA and GNU compiler toolchain](#Lab1:-Introduction-to-RISCV-ISA-and-GNU-compiler-toolchain)
+2. [Lab1 : Introduction to RISC-V ISA and GNU compiler toolchain](#Lab1-Introduction-to-RISCV-ISA-and-GNU-compiler-toolchain)
   	- [Task1 : Illustration of GCC GNU compiler](#Task1)
   	- [Task2 : Illustration of RISC-V GNU compiler](#Task2)  
   		- [O1 mode compilation](#a.-O1-Mode-compilation)  
         	- [Ofast mode compilation](#b.-Ofast-mode-compilation) 
         	- [Command explaination](#Commands-Explaination)   
 3. [Lab2 : Simulation and debugging of a C program using Spike](#Lab2:-Simulation-using-Spike-simulator)
-4. [Lab 3 : RISC-V Instruction identification](#Lab3:-RISCV-Instruction-identification)
-5. [Lab 4 : Functional simulation of RISC-V Core](#Lab4)
-6. [Lab 5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5:-=Custom-real-life-application-C-Code-and-do-the-following:)
+4. [Lab3 : RISC-V Instruction identification](#Lab3:-RISCV-Instruction-identification)
+5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
+6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5:-=Custom-real-life-application-C-Code-and-do-the-following:)
 - [References](#References)
   	
 
@@ -24,7 +24,7 @@ Create GitHub repository to manage the progress. Install GCC and RISC-V toolchai
 
 
 
-## Lab1: Introduction to RISCV ISA and GNU compiler toolchain:
+## Lab1 Introduction to RISCV ISA and GNU compiler toolchain   
 
 
 #### Task1:
