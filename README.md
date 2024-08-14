@@ -3,7 +3,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 
 # Table of contents
 -----
-- [Lab Preparations](#Lab)
+- `[Lab Preparations](#Lab)`
 - [Lab1 : Introduction to RISC-V ISA and GNU compiler toolchain](#Lab1)
   	- [Task1 : Illustration of GCC GNU compiler](#Task1)
   	- [Task2 : Illustration of RISC-V GNU compiler](#Task2)  
