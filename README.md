@@ -9,7 +9,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
   	- [Task2 : Illustration of RISC-V GNU compiler](#Task2)  
   		- [O1 mode compilation](#a.)  
         	- [Ofast mode compilation](#b.) 
-        	- [Command explaination](#Command)   
+        	- [Command explaination](#Commands_Explaination)   
 3. [Lab2 : Simulation and debugging of a C program using Spike](#Lab2)
 4. [Lab 3 : RISC-V Instruction identification](#Lab3)
 5. [Lab 4 : Functional simulation of RISC-V Core](#Lab4)
@@ -24,10 +24,11 @@ Create GitHub repository to manage the progress. Install GCC and RISC-V toolchai
 
 
 
-## Lab1: **Introduction to RISC-V ISA and GNU compiler toolchain**
+## Lab1: 
+**Introduction to RISC-V ISA and GNU compiler toolchain**
 
 
-**Task1:**
+### Task1:
 
 **Compile and execute a C program with GCC GNU compiler toolchain and generate the output.**
 **Code:**
@@ -70,11 +71,11 @@ The code can be edited via leafpad editor in the terminal window. The command fo
 
 ----
 
-**Task2:**
+### Task2:
 
 **Compile and execute the same C program with RISC-V GNU compiler toolchain, and compare the generated output with the output of Lab1 Task A.**
 
-**a. O1 Mode compilation:**
+### a. O1 Mode compilation:
 
 Consider the same C code used in task 1.
 ``` C Code
@@ -108,7 +109,7 @@ In order to map this command to riscv based assembly language compile it using t
 	To view the address of the subroutine (line main()) in the C code, type /main (if main()). To quit type :q.
 
 
-**b. Ofast mode compilation:**
+### b. Ofast mode compilation:
 
 Consider the same C program given in the O1 mode.
 
@@ -133,7 +134,7 @@ O1: selects a basic level of optimization which involves short compilation time.
 Ofast: selects an aggressive level of optimization. It gives us maximum performance but at the cost of precision and correctness issues. The code size or the given example was 12.
 
 ------
-**Commands Explaination:**
+### Commands_Explaination:
 
 **riscv64-unknown-elf-gcc -** RISC-V architecture based gcc compiler .
 
@@ -155,7 +156,7 @@ Ofast: selects an aggressive level of optimization. It gives us maximum performa
 
 --------
 
-**Lab2: Simulation using Spike simulator**
+## Lab2: Simulation using Spike simulator
 
 
 Task: Simulate the same C program used above (sum1ton.c) using the spike simulator and debug the RISC-V instructions
@@ -218,7 +219,7 @@ Similarly the debug checks can be run for other instructions. for example the st
 
 ------
 
-**Lab3: RISC-V Instruction identification**
+## Lab3: RISC-V Instruction identification
 
 **WHAT IS RISC-V?**
 RISC-V is an open-source instruction set architecture (ISA) that allows developers to develop processors for specific applications.
@@ -545,7 +546,7 @@ The J-type instructions are often used to perform jump to the desired memory loc
 
    
 ----
-**Lab4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs**   
+## Lab4: Use RISC-V Core:Verilog netlist and Testbench and perform the function simulation and observe the ouputs   
 
  We will be using the Verilog Code Netlist and the Testbench of RISC-V architecture that has already been written. The reference GitHub repository is :   [(https://github.com/vinayrayapati/rv32i/?tab=readme-ov-file#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)]
 
@@ -682,7 +683,7 @@ The simulation output waveforms for various instructions shown in the code above
 
 -----------     
 
-**Lab5: Choose a real life application and do the following:**
+## Lab5: Choose a real life application and do the following:
 * Write compilable C Code for the same
 * Compile and simulate it using GCC and upload the screenshot for the output
 * Compile and simulate the same using RISC-V GCC compiler and Spike simulator and upload the screenshot
@@ -707,7 +708,7 @@ The simulation output waveforms for various instructions shown in the code above
     The simulated output O1 with GCC and O2 with RISC-V GCC compilers were found to be same for the given application for same set of user inputs.
 
 ------
-**References:**
+## References:
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
 *  https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
