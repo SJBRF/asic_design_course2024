@@ -14,6 +14,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 4. [Lab3 : RISC-V Instruction identification](#Lab3-RISCV-Instruction-identification)
 5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
 6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Write-a-Custom-real-life-application-C-Code-and-do-the-following)
+7. [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
 - [References](#References)
   	
 
@@ -710,6 +711,171 @@ The simulation output waveforms for various instructions shown in the code above
     The simulated output O1 with GCC and O2 with RISC-V GCC compilers were found to be same for the given application for same set of user inputs.
 
 ------
+
+## Day3 Digital Logic with TL Verilog and Makerchip:
+
+**Logic Gates**
+Logic gates are fundamental building blocks of digital electronic circuits. They are responsible for performing logical operations on input signals and producing output signals based on predefined logic rules. These gates are the foundation of digital computation and are used to design and construct more complex digital systems like processors, memory units, and controllers. Logic gates manipulate binary signals, which are typically represented as "0" and "1". These binary signals correspond to the low and high voltage levels in a digital circuit, respectively. Logic gates take one or more input signals and produce an output signal based on a logical function.
+
+Here are some common types of logic gates:
+
+<img width="1236" alt="Screenshot 2024-08-16 at 11 27 48 PM" src="https://github.com/user-attachments/assets/803e3b49-3b35-4633-987b-728128a62bc3">    
+
+**Multiplexer Using Ternary Operator**
+
+Consider the verilog code for multiplexer gicen below :
+
+```
+	assign f = s ? x1 : x0;
+```
+This code uses ternary operator that will realize a simple 2:1 multiplexer hardware in which the output f follows x1 if s is 1 otherwise it will follow x0. The harware and logic gate representation l is shown below :
+
+<img width="569" alt="Screenshot 2024-08-16 at 11 30 04 PM" src="https://github.com/user-attachments/assets/a86a515f-a92c-42c5-a478-0e96f75cbb58">    
+
+The higher bit multiplexers can also be realized using the coditional operator. Consider the 4:1 multiplexer code given below :
+
+```
+	assign f = sel[0] ? a : (sel[1] ? b : (sel[2] ? c : d));
+```
+
+This code creates a priority for the inputs with input a getting the highest and input d getting the least. Instead of realizing as a single 4:1 multiplexer it will create a series of 2:1 multiplexers. In this case the sel is a one hot vector i.e, only one of the bit in the sel will be high at a time. The hardware realization is shown below :
+
+<img width="506" alt="Screenshot 2024-08-16 at 11 31 25 PM" src="https://github.com/user-attachments/assets/6aea7668-59e4-4d6b-b382-c804885012d8">    
+
+**Transaction Level(TL) - Verilog**
+
+TL-Verilog is a Verilog implementation of TL-X, a language extension that extends any HDL with transaction-level modeling. TL-Verilog was developed by Redwood EDA, and it's designed to enable more efficient and concise design representation while retaining compatibility with standard Verilog. It eliminates the need for the legacy language features of Verilog and introduces simpler syntax. TL-Verilog is specifically designed for modeling hardware and provides abstract context suited to hardware design with numerous benefits. It is built for the design process, not for the mere description of static designs. In transaction-level design, a transaction is an entity that moves through a microarchitecture and is operated upon and steered through the machinery by flow components such as pipelines, arbiters, and queues. TL-Verilog is the easiest way to write and edit Verilog with fewer bugs and is supported by Makerchip.
+
+**Makerchip IDE**
+
+Makerchip IDE is an integrated development environment specifically designed for digital design and hardware description language (HDL) programming. It offers a comprehensive platform for engineers, students, and hobbyists to design, simulate, and test digital circuits and systems. Makerchip IDE stands out for its user-friendly interface and its ability to support various HDLs like TL Verilog, SystemVerilog, Verilog, and VHDL. Within the Makerchip IDE, users can design complex digital systems by using a combination of pre-built and custom logic elements such as logic gates, flip-flops, multiplexers, and more. It provides a virtual canvas where users can visually construct their designs by interconnecting these components. One of the notable features of Makerchip IDE is its real-time simulation capability, allowing users to simulate their designs and observe their behavior before moving on to actual hardware implementation. This virtual prototyping helps catch errors early and refine designs efficiently. Overall, Makerchip IDE serves as an invaluable tool for both beginners and experienced digital designers to explore, learn, and experiment with digital logic design, fostering innovation and advancement in the field of digital electronics.
+
+**Basic Combinational Circuits in Makerchip**
+------
+**1. Pythagorean Example Demo**
+```
+	// Pythagora's Theorem
+         $aa_sq[7:0] = $aa[3:0] ** 2;
+         $bb_sq[7:0] = $bb[3:0] ** 2;
+
+         $cc_sq[8:0] = $aa_sq + $bb_sq;
+         $cc[4:0]    = sqrt($cc_sq);
+
+      	// Print
+            always_ff @(posedge clk) begin
+               \$display("sqrt((\%2d ^ 2) + (\%2d ^ 2)) = \%2d", $aa, $bb, $cc);
+            end
+
+   	// Stop simulation.
+   	*passed = *cyc_cnt > 40;
+```
+
+<img width="1680" alt="Screenshot 2024-08-16 at 11 44 36 PM" src="https://github.com/user-attachments/assets/1ca1357b-7d06-475c-ac84-2eb2e3c3f1ee">     
+
+-----
+**2. inverter**    
+
+The TL-Verilog code is shown below :
+```
+   	$out = $in;
+```
+<img width="1669" alt="inverter" src="https://github.com/user-attachments/assets/aea80830-32ce-407a-a15e-8bc8244bf262">   
+
+-----
+
+**3. 2 input AND Gate:**    
+
+The TL-Verilog code is shown below :
+```
+	$out = $in1 && $in2;
+```
+<img width="1668" alt="And" src="https://github.com/user-attachments/assets/a5ab41a5-88bb-4e27-8043-f660d428b638">
+
+------
+
+**4. 2 input OR gate:**    
+
+The TL-Verilog code is shown below :
+```
+	$out = $in1 || $in2;
+```
+
+<img width="1675" alt="or" src="https://github.com/user-attachments/assets/dda68e64-9679-4aaa-8333-201ff22dd82a">
+
+------
+
+**5. 2 input XOR gate:**     
+
+The TL-Verilog code is shown below :
+```
+	$out = $in1 ^ $in2;
+```
+<img width="1670" alt="xor" src="https://github.com/user-attachments/assets/476524f7-42ec-4f98-a4c0-f2ba4708e0ab">
+
+-----
+
+**6. Vector Addition:**     
+
+The TL-Verilog code is shown below :
+```
+	$out[4:0] = $in1[3:0] + $in2[3:0];
+```
+<img width="1673" alt="Screenshot 2024-08-16 at 5 08 44 PM" src="https://github.com/user-attachments/assets/ed0a8bb9-ec7e-47d1-a22f-8fd46026592a">
+
+-----
+
+**7. 2:1 Multiplexer:**    
+
+The TL-Verilog code is shown below :
+```
+   	$out = $sel ? $in1 : $in0;
+```
+<img width="1665" alt="mux2_ip" src="https://github.com/user-attachments/assets/1e413646-2eba-40bb-bc79-c32b55bbb30a">
+
+-----
+
+**8. 2:1 Vector Multiplexer:**    
+
+The TL-Verilog code is shown below :
+```
+   	$out[7:0] = $sel ? $in1[7:0] : $in0[7:0];
+```
+
+<img width="1606" alt="Screenshot 2024-08-16 at 5 17 32 PM" src="https://github.com/user-attachments/assets/71a8106c-cb64-4c68-b13d-092ccb7d8c0f">
+
+-----
+
+**9. Calculator?:**
+The function table is given below : 
+
+|Function|opcode|
+|:------:|:----:|
+|Addition|0x00|
+|Subration|0x01|
+|Multiplication|0x02|
+|Division|0x03|
+         
+
+The TL-Verilog code is shown below :
+```
+	   $reset = *reset;
+	   $op[1:0] = $random[1:0];
+	   
+	   $val1[31:0] = $rand1[3:0];
+	   $val2[31:0] = $rand2[3:0];
+	   $sum[31:0]  = $val1+$val2;
+	   $diff[31:0] = $val1-$val2;
+	   $prod[31:0] = $val1*$val2;
+	   $quot[31:0] = $val1/$val2;
+	   
+	   $out[31:0] = $op[1] ? ($op[0] ? $quot : $prod):($op[0] ? $diff : $sum);
+```
+
+<img width="1574" alt="calc" src="https://github.com/user-attachments/assets/20dcea3e-d1c3-4ba0-90c1-095553962388">
+
+-----
+
+
 ## References:
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
