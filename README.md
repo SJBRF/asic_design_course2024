@@ -14,7 +14,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 4. [Lab3 : RISC-V Instruction identification](#Lab3-RISCV-Instruction-identification)
 5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
 6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Write-a-Custom-real-life-application-C-Code-and-do-the-following)
-7. [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
+7. [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](#Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
 - [References](#References)
   	
 
