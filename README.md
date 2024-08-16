@@ -15,6 +15,8 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
 6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Write-a-Custom-real-life-application-C-Code-and-do-the-following)
 7. [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](#Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
+   * [Basic Combination Circuits](#Basic-Combination-Circuits)
+   * [Basic Sequential Circuits](#Basic-Sequential-Circuits)
 - [References](#References)
   	
 
@@ -875,6 +877,72 @@ The TL-Verilog code is shown below :
 
 -----
 
+## Basic Sequential Circuits in Makerchip:
+
+A sequential circuit is a type of digital circuit that employs memory elements to store information and produce outputs based not only on the current input values but also on the circuit's previous state. Unlike combinational circuits, which generate outputs solely based on the present input values, sequential circuits incorporate feedback loops and memory elements like flip-flops or registers to maintain and utilize their internal state.
+
+**1. Fibonacci Series**:   
+
+The TL-Verilog code for fibonacci series is shown below :
+```
+	   $reset = *reset;
+	   $num[31:0] = $reset ? 1 : (>>1$num + >>2$num);
+```
+
+Here, 
+>>1 indicates the previous value of num 
+>>2 indicates Value of num before 2 clock cycle
+
+The block diagram is shown below
+
+<img width="787" alt="Screenshot 2024-08-16 at 6 41 35 PM" src="https://github.com/user-attachments/assets/894e88ea-5b85-4483-ab4c-fe83a7633ad3">
+
+The makerchip simulation is shown below:   
+
+<img width="1676" alt="Screenshot 2024-08-16 at 9 22 12 PM" src="https://github.com/user-attachments/assets/ae6c13f2-e2e2-4b4c-964f-1aa5b05a3018">     
+
+----- 
+**2. Free running counter:**    
+
+The TL-Verilog code for free running counter is shown below :
+```
+	   $reset = *reset;
+	   $cnt[31:0] = $reset ? 0 : (>>1$cnt + 1);
+```
+The block diagram and MAkerchip simulation window are shown below:
+
+<img width="255" alt="Screenshot 2024-08-17 at 12 09 31 AM" src="https://github.com/user-attachments/assets/502957d9-49e1-48a8-9fc2-30a058c33e7c">    
+
+<img width="1657" alt="Screenshot 2024-08-16 at 9 54 15 PM" src="https://github.com/user-attachments/assets/81f38645-dc0b-48cf-bef1-e8d4bfa03348">
+
+-----   
+
+**3. Counter-Output with Calculator Integration:**
+
+The TL-verilog code for sequential calculator is shown below :
+```
+	   $reset = *reset;
+	   
+	   $cnt2[2:0] = $reset ? 0 : (>>1$cnt2 + 1);
+	   $cnt3[1:0] = $reset ? 0 : (>>1$cnt3 + 1);
+	   
+	   $op[1:0] = $random[1:0];
+	   
+	   $val1[31:0] = >>1$out;
+	   $val2[31:0] = $rand1[3:0];
+	   $sum[31:0] = $val1+$val2;
+	   $diff[31:0] = $val1-$val2;
+	   $prod[31:0] = $val1*$val2;
+	   $div[31:0] = $val1/$val2;
+	   
+	   $out[31:0] = $reset ? 32'h0 : ($op[1] ? ($op[0] ? $div : $prod):($op[0] ? $diff : $sum));
+```
+
+This code works like the normal calculator in which the result of the previous operation is considered as one of the operand for the next operation. Upon reset the result becomes zero.
+
+<img width="1637" alt="counter_with_calc" src="https://github.com/user-attachments/assets/b88c98c4-c10a-4217-afed-d49212393fb2">     
+
+-------
 
 ## References:
 
