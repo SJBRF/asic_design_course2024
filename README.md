@@ -16,7 +16,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Write-a-Custom-real-life-application-C-Code-and-do-the-following)
 7. [RISC-V MYTH WORKSHOP](#RISC-V-MYTH-WORKSHOP)
    * [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](#Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
-   	* [asic Combinational Circuits in Makerchip](#asic-Combinational-Circuits-in-Makerchip)
+   	* [Basic Combinational Circuits in Makerchip](#Basic-Combinational-Circuits-in-Makerchip)
    	* [Basic Sequential Circuits in Makerchip](#Basic-Sequential-Circuits-in-Makerchip)
    	* [Pipeline Concept](#Pipeline-Concept)
    * [Day4- Building a RISC-V CPU core Micro-architecture](#Day4--Building-a-RISC-V-CPU-core-Micro-architecture)
