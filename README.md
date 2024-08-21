@@ -956,7 +956,7 @@ This code works like the normal calculator in which the result of the previous o
 <img width="1637" alt="counter_with_calc" src="https://github.com/user-attachments/assets/b88c98c4-c10a-4217-afed-d49212393fb2">     
 
 -------
-**Pipeline Concept:**   
+## Pipeline Concept:  
 
 Pipelining is a technique used in computer architecture and digital system design to enhance the efficiency of processing by dividing a complex task into smaller, sequential stages. Each stage performs a specific operation on the data, and these stages are arranged in a pipeline. Pipelining enables multiple instructions or tasks to be executed concurrently, with different stages of different instructions being processed simultaneously. In a pipelined architecture, the processing of an instruction is divided into several stages. This allows for overlapping the execution of multiple instructions, reducing the overall time needed to complete a sequence of tasks.
 
@@ -1114,7 +1114,7 @@ The TL-Verilog code is given below:
 
 ---------
 
-**Day4- Building a RISC-V CPU core Micro-architecture:**
+## Day4- Building a RISC-V CPU core Micro-architecture:
 
 Micro-architecture describes how a processor is built and designed. Micro-architecture defines, the number and size of caches, cycle counts of instructions, pipeline length, and more. The basic RISC-V CPU block diagram is shown below :    
 
@@ -1123,7 +1123,7 @@ Micro-architecture describes how a processor is built and designed. Micro-archit
 <img width="859" alt="Screenshot 2024-08-18 at 10 35 25 PM" src="https://github.com/user-attachments/assets/d007bb50-d34a-4afa-aa4f-1cd550550457">     
 
 
-**1. Program Counter**  
+## 1. Program Counter  
 
 The program counter is a special register in a CPU that keeps track of the memory address of the next instruction to be fetched and executed. It is incremented as instructions are fetched, and it provides the address to the instruction memory for fetching the next instruction in the program.    
 
@@ -1211,7 +1211,7 @@ The TL-Verilog code for the program counter is shown below :
 <img width="1644" alt="PC_1stBlock" src="https://github.com/user-attachments/assets/186187f7-9aa1-49de-a2b4-cf365804d16f">       
 
 
-**2. Instruction Fetch**    
+## 2. Instruction Fetch   
 
 The Instruction Fetch Unit (IFU) in a CPU is responsible for ensuring that program instructions are retrieved from memory and executed in the correct order, serving as a crucial part of the core's control logic. The program counter plays a key role by indicating the address of the next instruction that needs to be fetched from the instruction memory. This step is essential for continuing the program’s execution and performing subsequent computations.
 
@@ -1311,7 +1311,7 @@ TL verilog code for Instruction Fetch is:
 <img width="1671" alt="Screenshot 2024-08-18 at 11 07 05 PM" src="https://github.com/user-attachments/assets/4063a759-baaa-46d6-b984-36c07b5e240d">
 
 
-**3. Instruction Decoder:**
+## 3. Instruction Decoder:
 
 The instruction decoder is a circuit within the CPU that interprets the machine instructions fetched from memory. It decodes the binary representation of the instruction and generates control signals that govern the operation of other components in the CPU to execute the instruction.    
 
@@ -1476,7 +1476,7 @@ The TL verilog code is given below:
 <img width="1619" alt="other_fields_decode" src="https://github.com/user-attachments/assets/8f30278b-835f-482b-8ea4-5b7ea6bb56eb">    
 
 
-**4. Register File Read**    
+## 4. Register File Read   
 
 Most instructions, particularly arithmetic ones, require data from source registers, which means the CPU needs to read from these registers. To facilitate this, the CPU's register file is designed to handle two simultaneous reads for the source operands (rs1 and rs2) and one write operation per cycle to the destination register. The register file receives rs1 and rs2 as inputs and outputs the corresponding register values. The enable bits for rs1 and rs2 are activated based on their validity, as determined earlier in the process. This setup, known as a 2-port register file, allows the CPU to read from two registers at the same time. The retrieved data is then stored in registers and sent to the ALU for further processing.    
 
@@ -1642,7 +1642,7 @@ The TL-Verilog code is given below :
 
 ```
 
-**5. ALU**  
+## 5. ALU 
 
 The ALU is a fundamental digital circuit within the CPU that performs arithmetic and logical operations on data. It can perform tasks such as addition, subtraction, multiplication, division, bitwise operations (AND, OR, XOR), and comparisons. The ALU generates results that are used in various computations specified by the instructions.   
 
@@ -1817,7 +1817,7 @@ The TL-Verilog Code is given below:
 <img width="1639" alt="ALU" src="https://github.com/user-attachments/assets/08c62efe-4566-4127-9ead-b854290b5991">      
 
 
-**6. Register File Write**
+## 6. Register File Write
 
 The write register file is responsible for storing the results of operations back into registers. After an instruction is executed, the result is often written back to the register file. This ensures that the updated data is available for subsequent instructions.
 
@@ -1998,7 +1998,7 @@ The TL-Verilog code is given below :
 
 
 
-**7. Branch Instructions**
+## 7. Branch Instructions
 
 The last stage involves adding support for branch instructions. In the RISC-V instruction set architecture, branches are conditional, so a branch is executed only when a particular condition is fulfilled. Moreover, the target address for the branch (Program Counter or PC) needs to be computed. If the branch condition is met, the PC is updated to this new target address. This ensures that when a branch occurs, the program counter correctly points to the desired instruction.   
 
@@ -2194,7 +2194,7 @@ The TL-Verilog Code is given below :
 
 
 
-**8. Final design of CPU:**
+## 8. Final design of CPU:
 
    To test the code using the testbech include the line in @1 stage :
 
@@ -2207,7 +2207,7 @@ The TL-Verilog Code is given below :
 
 ---------
 
-**Day- 5 Complete Pipelined RISC-V CPU Micro-architecture:**
+## Day-5 Complete Pipelined RISC-V CPU Micro-architecture:
 
 Hazards in Pipelinig
 Pipelining introduces certain hazards, which are situations that can potentially stall or disrupt the smooth execution of instructions. One of the most significant hazards is the "branch instruction hazard," also known as the "branch penalty."
@@ -2222,7 +2222,7 @@ Data Hazard: Data hazards arise when instructions depend on the results of previ
 
 Control Hazard (Branch Hazard): This is the primary concern when dealing with branch instructions in pipelining. It occurs due to the uncertainty of whether a branch will be taken or not taken. In a pipelined processor, instructions are fetched ahead of time, but the actual outcome of a branch might not be known until it reaches the execution stage. If the branch outcome is different from what was predicted, instructions fetched after the branch could be incorrect, leading to a need to flush, or discard, these incorrect instructions and restart from the correct point. This process is called "pipeline flushing" and results in a performance penalty, known as the "branch penalty."
 
-**Final 5 Stage Pipelined Logic:**
+## Final 5 Stage Pipelined Logic:
 
 ```
 	\m4_TLV_version 1d: tl-x.org
