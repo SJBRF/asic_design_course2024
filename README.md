@@ -2209,18 +2209,33 @@ The TL-Verilog Code is given below :
 
 ## Day5- Complete Pipelined RISC-V CPU Micro-architecture:
 
-Hazards in Pipelinig
+**Hazards in Pipelinig**
 Pipelining introduces certain hazards, which are situations that can potentially stall or disrupt the smooth execution of instructions. One of the most significant hazards is the "branch instruction hazard," also known as the "branch penalty."
 
 Branch instructions are used to alter the sequence of instructions being executed by the processor. They allow the program to make decisions, such as jumping to a different section of code depending on a certain condition. Branch instructions introduce hazards in pipelining due to the fact that the outcome of the branch (taken or not taken) is often determined later in the pipeline than the fetch and decode stages.
 
 There are three main types of branch hazards:
 
-Structural Hazard: This occurs when there's a resource conflict in the pipeline. For instance, a branch instruction might need to access the same execution unit or memory stage as another instruction already in the pipeline. This leads to a pipeline stall while the resources are being reallocated or the conflict is resolved.
+**Structural Hazard:** This occurs when there's a resource conflict in the pipeline. For instance, a branch instruction might need to access the same execution unit or memory stage as another instruction already in the pipeline. This leads to a pipeline stall while the resources are being reallocated or the conflict is resolved.
 
-Data Hazard: Data hazards arise when instructions depend on the results of previous instructions, and the data needed for the current instruction is not yet available. This can lead to incorrect results if not handled properly. In the context of branch instructions, data hazards can occur when instructions following a branch instruction depend on the outcome of that branch, but the branch decision hasn't been made yet.
+**Data Hazard:** Data hazards arise when instructions depend on the results of previous instructions, and the data needed for the current instruction is not yet available. This can lead to incorrect results if not handled properly. In the context of branch instructions, data hazards can occur when instructions following a branch instruction depend on the outcome of that branch, but the branch decision hasn't been made yet.
 
-Control Hazard (Branch Hazard): This is the primary concern when dealing with branch instructions in pipelining. It occurs due to the uncertainty of whether a branch will be taken or not taken. In a pipelined processor, instructions are fetched ahead of time, but the actual outcome of a branch might not be known until it reaches the execution stage. If the branch outcome is different from what was predicted, instructions fetched after the branch could be incorrect, leading to a need to flush, or discard, these incorrect instructions and restart from the correct point. This process is called "pipeline flushing" and results in a performance penalty, known as the "branch penalty."
+**Control Hazard (Branch Hazard)**: This is the primary concern when dealing with branch instructions in pipelining. It occurs due to the uncertainty of whether a branch will be taken or not taken. In a pipelined processor, instructions are fetched ahead of time, but the actual outcome of a branch might not be known until it reaches the execution stage. If the branch outcome is different from what was predicted, instructions fetched after the branch could be incorrect, leading to a need to flush, or discard, these incorrect instructions and restart from the correct point. This process is called "pipeline flushing" and results in a performance penalty, known as the "branch penalty."
+
+To design the 5 stage Pipelined logic for the RISC-V processor, following steps were carried out:
+1) A single stage logic is designed
+2) A 3-cycle valid signal is created. There is an additional start signal which signifies the first high bit of valid signal. So valid is 0 for reset and 1 for start. 
+   Otherwise, it is assigned the 3-cycle looped value.
+3) A valid_taken_br signal is added to handle invalid cases. Accordingly, the PC mux is also modified.
+4) Logic distribution across 5 pipeline stages is done.
+5) Register File Bypass is introduced to handle data hazards and improve performance by allowing instructions to use the result of an operation before it has been written 
+   back to the register file. A common hazard is Read After Write (RAW) Hazard which occurs when an instruction needs to read a register that is yet to be updated by a 
+   previous instruction.
+6) The branch instruction is updated to consider the 3-cycle value based on the non-existence of a valid signal in the previous two cycles. The PC is incremented every cycle.
+7) The decode unit is updated with all RISC-V instructions. the ALU is also completed. The SLT(set less than) and SLTI( set less than immediate) share a common term with SLTIU( Set less than immediate unsigned) hence intermediate signals are used.
+8) The load and store instructions are used to transfer data between memory and registers. These instructions are essential for handling data in programs, as they enable reading from and writing to memory locations.
+9) The loading of data from memory is enabled by uncommenting the m4+dmem(@4) line. The interface signals are also connected.
+10) The test program is modified to store the result in register r15.
 
 ## Final 5 Stage Pipelined Logic:
 
