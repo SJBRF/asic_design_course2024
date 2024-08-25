@@ -29,6 +29,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
      	7. [Branch Instruction](#Branch-Instruction)
      	8. [Final design of CPU](#Final-design-of-CPU)
    * [Day- 5 Complete Pipelined RISC-V CPU Micro-architecture](#Day5--Complete-Pipelined-RISC-V-CPU-Micro-architecture)
+8. [RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
 - [References](#References)
   	
 
@@ -2521,6 +2522,90 @@ To design the 5 stage Pipelined logic for the RISC-V processor, following steps 
 
 
 -----
+## RISC-V pre-synthesis simulation using iverilog GTKwave
+
+The RISC-V processor was designed and created by the TL-Verilog language in the Maketchip IDE. Now, we need a way to compile and transform it to the Verilog language for FPGA implementation. The sandpiper-saas compiler was used to do the job. The pre-synthesis simulation was carried out using the GTKWave simulkator.
+
+**Step-by-Step process of simulation:**
+
+1. Install the Required Packages:
+```
+sudo apt install make python python3 python3-pip git iverilog gtkwave docker.io
+$ sudo chmod 666 /var/run/docker.sock
+$ cd ~
+$ pip3 install pyyaml click sandpiper-saas
+```
+2. Now we can clone this repository in an arbitrary directory (we'll choose home directory here):
+
+```
+$ cd ~
+$ git clone https://github.com/manili/VSDBabySoC.git
+```
+
+![2](https://github.com/user-attachments/assets/59bbcabb-2ca7-4094-a8fd-712ef9c3821b)
+
+
+3. Replace the .tlv file in the VSDBabySoC/src/module folder with our RISC-V design .tlv file which we want to convert into verilog
+
+```
+$ cd VSDBabySoC
+```
+4. Translate .tlv definition of RISC-V into .v definition.
+
+```
+$ sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
+```
+
+5. Compile and simulate RISC-V design.
+```
+$ iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module -
+```
+
+6. The result of the simulation (i.e. pre_synth_sim.vcd) will be stored in the output/pre_synth_sim directory.
+```
+$ cd output
+$ ./pre_synth_sim.out
+```
+
+ 7. To open the .vcd simulation file through GTKWave simulation tool
+    
+```
+$ gtkwave pre_synth_sim.vcd
+```
+
+<img width="1318" alt="Screenshot 2024-08-25 at 6 16 38 PM" src="https://github.com/user-attachments/assets/21b96dac-1a00-4616-9831-645e90b8ceed">
+
+**Pre-synthesis Simulation results:**
+Signals to note are the following:
+a. clk_pri: This is the clock input to the RISC-V core. 
+b. reset: This is the input reset signal to the RISC-V core. 
+c. OUT[9:0]: This is the 10-bit output [9:0] OUT port of the RISC-V core. This port comes from the RISC-V register #15, originally.
+
+**GTKWave Simulation waveforms:**
+1. ![clk_reset](https://github.com/user-attachments/assets/539edeae-1d13-43cc-9019-544d2f724544)
+   <br>
+2. ![out1](https://github.com/user-attachments/assets/f56b9162-7294-40d0-ad31-00c00b6683ee)
+   <br>
+3. ![out2](https://github.com/user-attachments/assets/fbf84c68-f153-4f94-a430-88a93c30ec21)
+   <br>
+4. ![out3](https://github.com/user-attachments/assets/3a757427-8960-4d57-9283-cf7efaeab9a8)
+   <br>
+5. ![out4](https://github.com/user-attachments/assets/5180155e-a70a-455b-9c87-05b92e37f0d6)
+
+
+**Makerchip IDE simulation results for comparison**
+1. <img width="1478" alt="Screenshot 2024-08-21 at 4 16 55 PM" style="margin-bottom: 20px;" src="https://github.com/user-attachments/assets/94a50f38-6493-4bed-891c-88ccea8a2535">
+
+   <br>
+   
+2. <img width="1609" alt="out_1" style="margin-bottom: 80px;" src="https://github.com/user-attachments/assets/eec22b43-67e8-4b56-8561-677e811f4861">   
+
+   <br>
+
+3. <img width="1557" alt="out2" style="margin-bottom: 80px;" src="https://github.com/user-attachments/assets/4f8254bf-3e77-447f-9d57-a123ab3b666b">   
+
+
+
 ## References:
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
