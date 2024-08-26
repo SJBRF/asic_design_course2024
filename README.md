@@ -2582,15 +2582,29 @@ b. reset: This is the input reset signal to the RISC-V core.
 c. OUT[9:0]: This is the 10-bit output [9:0] OUT port of the RISC-V core. This port comes from the RISC-V register #15, originally.
 
 **GTKWave Simulation waveforms:**
-1. ![clk_reset](https://github.com/user-attachments/assets/539edeae-1d13-43cc-9019-544d2f724544)
+1. clk_pri and reset signals
+   
+![clk_reset](https://github.com/user-attachments/assets/8b1b6e5d-e321-4942-b8de-270cb85d2df6)
+
    <br>
-2. ![out1](https://github.com/user-attachments/assets/f56b9162-7294-40d0-ad31-00c00b6683ee)
+2. Sum output of 1+2+3
+
+![out1_ed](https://github.com/user-attachments/assets/76a1c5d1-cc01-4b85-8b6e-f44cca85753b)
+
    <br>
-3. ![out2](https://github.com/user-attachments/assets/fbf84c68-f153-4f94-a430-88a93c30ec21)
+3. Sum output till (1+2+3) +4+5+6
+
+![out2_ed](https://github.com/user-attachments/assets/6aed5b1a-e78f-4c85-9368-dceef087abe1)
+
    <br>
-4. ![out3](https://github.com/user-attachments/assets/3a757427-8960-4d57-9283-cf7efaeab9a8)
+5. Sum output of 1+2+3+4+5+6+7+8+9
+
+![out3_ed](https://github.com/user-attachments/assets/36bb106e-edd2-40c9-a0f0-86753b506385)
+
    <br>
-5. ![out4](https://github.com/user-attachments/assets/5180155e-a70a-455b-9c87-05b92e37f0d6)
+6. 10- bit output result of RISC-V processor
+
+![10bit_out_ed](https://github.com/user-attachments/assets/beaca0aa-74af-49a2-a038-8072ca44a43d)
 
 
 **Makerchip IDE simulation results for comparison**
