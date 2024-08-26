@@ -2241,7 +2241,7 @@ To design the 5 stage Pipelined logic for the RISC-V processor, following steps 
 ## Final 5 Stage Pipelined Logic:
 
 ```
-	\m4_TLV_version 1d: tl-x.org
+\m4_TLV_version 1d: tl-x.org
 	\SV
 	   // This code can be found in: https://github.com/stevehoover/RISC-V_MYTH_Workshop
 	   
@@ -2501,7 +2501,7 @@ To design the 5 stage Pipelined logic for the RISC-V processor, following steps 
 	   m4+cpu_viz(@4)    // For visualisation, argument should be at least equal to the last stage of CPU logic. @4 would work for all labs.
 	\SV
 	   endmodule
-
+	
 ```   
 
 **customised clock signal clk_pri:**     
@@ -2574,6 +2574,10 @@ $ gtkwave pre_synth_sim.vcd
 ```
 
 <img width="1318" alt="Screenshot 2024-08-25 at 6 16 38 PM" src="https://github.com/user-attachments/assets/21b96dac-1a00-4616-9831-645e90b8ceed">
+
+The verilog testbench code for the pre-synthesis simulation of the RISC-V verilog code is given below:
+
+![TB](https://github.com/user-attachments/assets/a401e644-8bfa-4d39-99d7-6ba4099e05b4)
 
 **Pre-synthesis Simulation results:**
 Signals to note are the following:
