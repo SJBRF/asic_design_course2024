@@ -30,7 +30,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
      	8. [Final design of CPU](#Final-design-of-CPU)
    * [Day- 5 Complete Pipelined RISC-V CPU Micro-architecture](#Day5--Complete-Pipelined-RISC-V-CPU-Micro-architecture)
 8. [Lab7: RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
-9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave:)
+9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave)
     
 - [References](#References)
   
@@ -2627,7 +2627,7 @@ c. OUT[9:0]: This is the 10-bit output [9:0] OUT port of the RISC-V core. This p
 
 -------------
 
-## BabySoc Pre-synthesis simulation using iverilog GTKwave:
+## BabySoc Pre-synthesis simulation using iverilog GTKwave
 
 **Task1: Software Installation: Install iverilog, GTKwave, Yosys and OpenSTA on our personal machines.**
 --------
