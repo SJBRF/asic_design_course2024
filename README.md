@@ -14,7 +14,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 4. [Lab3 : RISC-V Instruction identification](#Lab3-RISCV-Instruction-identification)
 5. [Lab4 : Functional simulation of RISC-V Core](#Lab4)
 6. [Lab5 : Choose an application and compile the c code for the same using GCC and Spike simulators](#Lab5-Write-a-Custom-real-life-application-C-Code-and-do-the-following)
-7. [RISC-V MYTH WORKSHOP](#RISC-V-MYTH-WORKSHOP)
+7. [Lab6 : RISC-V MYTH WORKSHOP](#RISC-V-MYTH-WORKSHOP)
    * [RISCV- Day3 : Digital Logic with TL-Verilog and Makerchip](#Day3-Digital-Logic-with-TL-Verilog-and-Makerchip)
    	* [Basic Combinational Circuits in Makerchip](#Basic-Combinational-Circuits-in-Makerchip)
    	* [Basic Sequential Circuits in Makerchip](#Basic-Sequential-Circuits-in-Makerchip)
@@ -29,8 +29,11 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
      	7. [Branch Instruction](#Branch-Instruction)
      	8. [Final design of CPU](#Final-design-of-CPU)
    * [Day- 5 Complete Pipelined RISC-V CPU Micro-architecture](#Day5--Complete-Pipelined-RISC-V-CPU-Micro-architecture)
-8. [RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
+8. [Lab7: RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
+9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#Lab-8:-BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave:)
+    
 - [References](#References)
+  
   	
 
 --------
@@ -2622,6 +2625,221 @@ c. OUT[9:0]: This is the 10-bit output [9:0] OUT port of the RISC-V core. This p
 
 3. <img width="1557" alt="out2" style="margin-bottom: 80px;" src="https://github.com/user-attachments/assets/4f8254bf-3e77-447f-9d57-a123ab3b666b">   
 
+-------------
+
+## Lab 8: BabySoc Pre-synthesis simulation using iverilog GTKwave:
+
+**Task1: Software Installation: Install iverilog, GTKwave, Yosys and OpenSTA on our personal machines.**
+--------
+**OpenSTA:**
+   
+OpenSTA is a gate level static timing verifier. As a stand-alone executable it can be used to verify the timing of a design using standard file formats such as Verilog netlist, Liberty library, SDC timing constraints, SDF delay annotation and SPEF parasitics. OpenSTA uses a TCL command interpreter to read the design, specify timing constraints and print timing reports.
+**Steps to install OpenSTA**
+a. Install the dependencies using the command shown below-
+```
+sudo apt-get install cmake clang gcc tcl swig bison flex
+```
+
+b. Use the following command to install OpenSTA
+```
+git clone https://github.com/The-OpenROAD-Project/OpenSTA.git
+cd OpenSTA
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
+![Pasted image 12](https://github.com/user-attachments/assets/a1b90840-fd54-46e0-a4ca-f54ceb12f370)
+
+   
+**Yosys:**
+
+Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains. Selected features and typical applications:
+	a. Process almost any synthesizable Verilog-2005 design
+	b. Converting Verilog to BLIF / EDIF/ BTOR / SMT-LIB / simple RTL Verilog / etc.
+	c. Built-in formal methods for checking properties and equivalence
+	d. Mapping to ASIC standard cell libraries (in Liberty File Format)
+	e. Mapping to Xilinx 7-Series and Lattice iCE40 and ECP5 FPGAs
+	f. Foundation and/or front-end for custom flows
+
+Yosys can be adapted to perform any synthesis job by combining the existing passes (algorithms) using synthesis scripts and adding additional passes as needed by extending the Yosys C++ code base. Yosys also serves as backend for several tools that use formal methods to reason about designs, such as sby for SMT-solver-based formal property checking or mcy for evaluating the quality of testbenches with mutation coverage metrics. Yosys is free software licensed under the ISC license (a GPL compatible license that is similar in terms to the MIT license or the 2-clause BSD license).
+
+**Steps to install Yosys**:
+```
+sudo apt-get update
+ git clone https://github.com/YosysHQ/yosys.git
+ cd yosys
+ sudo apt install make (If make is not installed please install it) 
+ sudo apt-get install build-essential clang bison flex \
+    libreadline-dev gawk tcl-dev libffi-dev git \
+    graphviz xdot pkg-config python3 libboost-system-dev \
+    libboost-python-dev libboost-filesystem-dev zlib1g-dev
+ make config-gcc
+ make 
+ sudo make install
+```
+
+![Pasted image 10](https://github.com/user-attachments/assets/bfaa7777-24a2-4bee-b55d-92e34135500c)
+
+**iverilog:**
+
+Icarus Verilog (iverilog) is an implementation of the Verilog hardware description language compiler that generates netlists in the desired format (EDIF). It supports the 1995, 2001 and 2005 versions of the standard, portions of SystemVerilog, and some extensions.Icarus Verilog is released under the GNU General Public License, Icarus Verilog is free software. Icarus is composed of a Verilog compiler (including a Verilog preprocessor) with support for plug-in backends, and a virtual machine that simulates the design.
+
+**Steps to install iverilog**
+```
+sudo apt-get install iverilog
+```
+
+![Pasted image 8](https://github.com/user-attachments/assets/3a0d2a38-ad7a-459d-ad66-cb86d9eb50e4)
+
+**GTKwave:**
+
+GTKWave is a fully featured GTK+ based wave viewer for Unix and Win32 which reads LXT, LXT2, VZT, FST, and GHW files as well as standard Verilog VCD/EVCD files and allows their viewing.
+
+**Steps to install GTKwave**:
+```
+sudo apt install gtkwave
+```
+
+![GTKwave](https://github.com/user-attachments/assets/5eb38340-092c-4b4a-8b3e-d8608e2e7006)
+-----
+
+**Task2:** Download all the files from the VSDBabySoc project from the given github link: https://github.com/manili/VSDBabySoC.git
+--------
+VSDBabySoC is a small yet powerful RISCV-based SoC. The main purpose of designing such a small SoC is to test three open-source IP cores together for the first time and calibrate the analog part of it. VSDBabySoC contains one RVMYTH microprocessor, an 8x-PLL to generate a stable clock, and a 10-bit DAC to communicate with other analog devices.
+
+![babysoc](https://github.com/user-attachments/assets/f4f7b91f-9d7c-4dbe-bb2c-77bc2d964d50)
+
+**What is RVMYTH?**
+
+RVMYTH core is a simple RISCV-based CPU, introduced in Lab6 and Lab7. In lab 6,  a risc-v processor was created from scratch using the TLV for faster development. The main task of the processor is to add numbers from 1 to 9 and generate the sum output.
+
+**What is AVSDPLL?**
+
+A phase-locked loop or PLL is a control system that generates an output signal whose phase is related to the phase of an input signal. PLLs are widely used for synchronization purposes, including clock generation and distribution. In this Soc project, the PLL will generate the clock for the rvmyth core.
+
+**What is AVSDDAC?**
+A digital-to-analog converter or DAC is a system that converts a digital signal into an analog signal. DACs are widely used in modern communication systems enabling the generation of digitally-defined transmission signals. As a result, high-speed DACs are used for mobile communications and ultra-high-speed DACs are employed in optical communications systems. The DAC module will that the 10 bit digital output from the rvmyth core and generate the corresponding analog output signal 'OUT'.
+
+All the the files relevant for the VSDBabySoC simulation, including RVMYTH.tlv, pll.v and dac.v, were downloaded from the reference repository using the following commands
+```
+$ cd ~
+$ git clone https://github.com/manili/VSDBabySoC.git
+```
+------
+**Task3:** **Edit the VSDBabySoC top level so that it links to my rvmyth code and produce the output for that.**
+
+The RVMYTH.tlv file in the cloned VSDBabySoC folder was replaced by my rvmyth.tlv file. The .tlv file was converted into verilog file using sandpiper-saas. The top module VSDBabySoC was modified to include my rvmyth.v file. The step by step modeling walkthrough is given below.
+
+1. Installation of some important packages:
+```
+sudo apt install make python python3 python3-pip git iverilog gtkwave
+cd ~
+sudo apt-get install python3-venv
+python3 -m venv .venv
+source ~/.venv/bin/activate
+pip3 install pyyaml click sandpiper-saas
+```
+
+2. Cloning the VSDBabySoC repository:
+```
+git clone https://github.com/manili/VSDBabySoC.git
+```
+
+3. Creating the pre_synthesis.vcd simulation file
+```
+cd VSDBabySoC
+sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
+
+mkdir output
+iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module
+
+cd output
+./pre_synth_sim.out
+```
+![Pasted image](https://github.com/user-attachments/assets/0ef62303-8488-47a8-8a6c-6608693b6b4b)
+
+4. opening simulation waveforms in GTKwave
+```
+gtkwave pre_synth_sim.vcd
+```
+![Pasted image 9](https://github.com/user-attachments/assets/b330f6a4-2e87-493a-9584-f0e37818827b)
+
+-----
+**Task4: Generating the output waveforms**
+The toplevel module VSDBabySoC.v verilog code was updated to include my rvmyth.v file. The verilog code is given below.
+```
+module vsdbabysoc (
+   output wire OUT,
+   //
+   input  wire reset,
+   //
+   input  wire VCO_IN,
+   input  wire ENb_CP,
+   input  wire ENb_VCO,
+   input  wire REF,
+   //
+   // input  wire VREFL,
+   input  wire VREFH
+);
+
+   wire clk_pri;
+   wire [9:0] RV_TO_DAC;
+
+   rvmyth core_pri(
+      .OUT(RV_TO_DAC),
+      .clk_pri(clk_pri),
+      .reset(reset)
+   );
+
+   avsdpll pll (
+      .CLK(clk_pri),
+      .VCO_IN(VCO_IN),
+      .ENb_CP(ENb_CP),
+      .ENb_VCO(ENb_VCO),
+      .REF(REF)
+   );
+
+   avsddac dac (
+      .OUT(OUT),
+      .D(RV_TO_DAC),
+      // .VREFL(VREFL),
+      .VREFH(VREFH)
+   );
+   
+endmodule
+```
+
+The output waveforms are given below:
+
+**1. clk and reset signals**
+   ![Pasted image 7](https://github.com/user-attachments/assets/8f333775-7e73-481f-9a38-5d4e076ecb7a)
+------
+
+**2. PLL clock input and output signals**
+
+   ![Pasted image 11](https://github.com/user-attachments/assets/db2ce619-9231-4105-b1c1-005a77b52cb9)
+-----
+
+**3. rvmyth sum output signal**
+
+   ![Pasted image 3](https://github.com/user-attachments/assets/9a4d9c3b-be66-49a8-a72e-67f8e3dbf876)
+-----
+   ![Pasted image 4](https://github.com/user-attachments/assets/599a634a-f4aa-4877-8373-a385652b2c25)
+----
+   ![Pasted image 5](https://github.com/user-attachments/assets/d806cca1-6664-4689-98ba-96863a0388a7)
+-----
+
+**4. DAC output signal**
+
+   ![Pasted image 6](https://github.com/user-attachments/assets/95f782cf-61e9-4ac3-9ab1-f0fd96d57dba)
+----
+
+**5. Proof of authenticity:**
+
+   
+   ![Pasted image 2](https://github.com/user-attachments/assets/72a1e25c-1111-4749-b7b3-dc50beed8d34)
 
 
 ## References:
