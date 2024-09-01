@@ -30,7 +30,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
      	8. [Final design of CPU](#Final-design-of-CPU)
    * [Day- 5 Complete Pipelined RISC-V CPU Micro-architecture](#Day5--Complete-Pipelined-RISC-V-CPU-Micro-architecture)
 8. [Lab7: RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
-9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#Lab-8:-BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave:)
+9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave:)
     
 - [References](#References)
   
