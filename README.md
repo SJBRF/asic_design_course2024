@@ -2627,7 +2627,7 @@ c. OUT[9:0]: This is the 10-bit output [9:0] OUT port of the RISC-V core. This p
 
 -------------
 
-## Lab 8: BabySoc Pre-synthesis simulation using iverilog GTKwave:
+## BabySoc Pre-synthesis simulation using iverilog GTKwave:
 
 **Task1: Software Installation: Install iverilog, GTKwave, Yosys and OpenSTA on our personal machines.**
 --------
