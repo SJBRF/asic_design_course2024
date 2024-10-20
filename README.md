@@ -31,6 +31,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
    * [Day- 5 Complete Pipelined RISC-V CPU Micro-architecture](#Day5--Complete-Pipelined-RISC-V-CPU-Micro-architecture)
 8. [Lab7: RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
 9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave)
+10. [Lab10 : RTL Design with Verilog using SKY130 Technology - Workshop](#RTL-Design-with-Verilog-using-SKY130-Technology---Workshop)
     
 - [References](#References)
   
@@ -2841,7 +2842,12 @@ The output waveforms are given below:
    
    ![Pasted image 2](https://github.com/user-attachments/assets/72a1e25c-1111-4749-b7b3-dc50beed8d34)
 
+------
+## RTL Design with Verilog using SKY130 Technology - Workshop:
 
+
+
+-----
 ## References:
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
