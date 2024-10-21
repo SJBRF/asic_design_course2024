@@ -3530,9 +3530,49 @@ Since this code doesn't need optimisation it will infer a D flip-flop with async
 
 Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous set and reset as shown above. 
 
+
+**Example 4:**
+
+![dff_const](https://github.com/user-attachments/assets/63f197d2-1f70-4187-a0d8-9d32680ad200)
+
+The optimised design infers a direct connection of VDD (logic 1) to the output q as shown above
+
+**Example 5:**
+
+![dff_const5](https://github.com/user-attachments/assets/85501551-872d-4ce1-8cfd-b7b07a0093a4)
+
+Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous reset as shown above.
+
+## Optimisation of Unused States
+
+**Steps to simulate and generate the netlist for the below designs**
+
+Simulation steps :
+```
+iverilog <rtl_name.v> <tb_name.v>
+./a.out
+gtkwave <dump_file_name.vcd>
+```
+Generating netlist steps :
+
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog <module_name.v> 
+synth -top <top_module_name>
+opt_clean -purge
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+show
+write_verilog -noattr <netlist_name.v>
+```
+
+
+
 ------
 ## **Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch**
 
+![dff_const](https://github.com/user-attachments/assets/60043781-f11e-4f94-b462-140577b5a0d3)
 
 -----
 ## References:
