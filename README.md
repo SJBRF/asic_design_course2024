@@ -32,7 +32,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 8. [Lab7: RISC-V pre-synthesis simulation using iverilog GTKwave](#RISC-V-pre-synthesis-simulation-using-iverilog-GTKwave)
 9. [Lab8: BabySoc Pre-synthesis simulation using iverilog GTKwave](#BabySoc-Pre-synthesis-simulation-using-iverilog-GTKwave)
 10. [Lab9 : RTL Design with Verilog using SKY130 Technology - Workshop](#RTL-Design-with-Verilog-using-SKY130-Technology---Workshop)
-    * [Software Installation](#Software-Installation)
+    * [Software Installations](#Software-Installations)
     * [Day1: Introduction to Verilog RTL Design and Synthesis](#Day1:-Introduction-to-Verilog-RTL-Design-and-Synthesis)
     * [Day2: Timing Libs, Hierarchical vs Flat Synthesis, efficient Flop coding styles](#Day2:-Timing-Libs,-Hierarchical-vs-Flat-Synthesis,-efficient-Flop-coding-styles)
     * [Day3: Combinational and Sequential Optimizations](#Day3:-Combinational-and-Sequential-Optimizations)
@@ -2850,7 +2850,8 @@ The output waveforms are given below:
 ------
 ## RTL Design with Verilog using SKY130 Technology - Workshop:
 
-**Software Installation:**
+**Software Installations**
+
 **a) YOSYS**
 
 Yosys is a framework for Verilog RTL synthesis. It currently has extensive Verilog-2005 support and provides a basic set of synthesis algorithms for various application domains. Selected features and typical applications:
