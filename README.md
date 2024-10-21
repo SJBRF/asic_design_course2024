@@ -2850,7 +2850,7 @@ The output waveforms are given below:
 ------
 ## RTL Design with Verilog using SKY130 Technology - Workshop:
 
-**Software Installations**
+## **Software Installations**
 
 **a) YOSYS**
 
@@ -2883,7 +2883,7 @@ sudo make install
 
 Icarus Verilog is an implementation of the Verilog hardware description language compiler that generates netlists in the desired format (EDIF). It supports the 1995, 2001 and 2005 versions of the standard, portions of SystemVerilog, and some extensions.Icarus Verilog is released under the GNU General Public License, Icarus Verilog is free software. Icarus is composed of a Verilog compiler (including a Verilog preprocessor) with support for plug-in backends, and a virtual machine that simulates the design.
 
-**Installion Steps:**
+**Installation Steps:**
 ```
 sudo apt-get install iverilog
 ```
@@ -2907,7 +2907,7 @@ sudo apt install gtkwave
 
 ngspice is the open source spice simulator for electric and electronic circuits comprising of JFETs, bipolar and MOS transistors, passive elements like R, L, or C, diodes, transmission lines and other devices, all interconnected in a netlist. Digital circuits are simulated as well, event driven and fast, from single gates to complex circuits. And you may enter the combination of both analog and digital as a mixed-signal circuit. ngspice offers a wealth of device models for active, passive, analog, and digital elements. Model parameters are provided by our collections, by the semiconductor device manufacturers, or from semiconductor foundries. The user can add their circuits as a netlist, and the output is one or more graphs of currents, voltages and other electrical quantities or is saved in a data file.
 
-**Installion Steps:**
+**Installation Steps:**
 
 ```
 # Dependency for ngspice:
@@ -2931,7 +2931,7 @@ sudo make install
 **e) OPENSTA:**
 OpenSTA is a gate level static timing verifier. As a stand-alone executable it can be used to verify the timing of a design using standard file formats such as Verilog netlist, Liberty library, SDC timing constraints, SDF delay annotation and SPEF parasitics. OpenSTA uses a TCL command interpreter to read the design, specify timing constraints and print timing reports.
 
-**Installion Steps:**
+**Installation Steps:**
 Prior to the installation of the OpenSTA install the dependencies using the command shown below :
 ```
 sudo apt-get install cmake clang gcc tcl swig bison flex
@@ -2953,7 +2953,7 @@ sudo make install
 **f) MAGIC:**
 Magic is an electronic design automation (EDA) layout tool for very-large-scale integration (VLSI) integrated circuit (IC) originally written by John Ousterhout and his graduate students at UC Berkeley. Work began on the project in February 1983. The main difference between Magic and other VLSI design tools is its use of "corner-stitched" geometry, in which all layout is represented as a stack of planes, and each plane consists entirely of "tiles" (rectangles). Magic is primarily famous for writing the scripting interpreter language Tcl.
 
-**Installion Steps:**
+**Installation Steps:**
 
 ```
 sudo apt-get install m4
@@ -2978,19 +2978,124 @@ sudo apt install magic
 -----
 
 
-**Day1: Introduction to Verilog RTL Design and Synthesis**
+## **Day1: Introduction to Verilog RTL Design and Synthesis**
+
+**Overview**
+
+This session is about steps followed to compile and simulate verilog design and testbench codes using iverilog tool. This section also deals with graphical waveform viewer tool called gtkwave and synthesis tool called yosys and its steps to produce netlist from design file.
+
+**Steps followed to copy the lab example files**
+```
+mkdir PD
+cd PD
+git clone https://github.com/kunalg123/vsdflow.git
+git clone https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+```
+Command to view the folder structure of the lab, and list the contents of the directory:
+```
+cd PD/sky130RTLDesignAndSynthesisWorkshop/
+ls -R
+```
+![all_files_ls_r](https://github.com/user-attachments/assets/17f9e210-847f-4da3-8324-dc78e6d57ff5)
+------
+Standard cell library - It is a collection of well defined and appropriately characterized logic gates that can be used to implement a digital design. Timing data of standard cells is provided in the Liberty format.
+
+The lib directory contains the library file sky130_fd_sc_hd__tt_025C_1v80.lib. Libraries in the SKY130 PDK are named using the following scheme:
+<Process_name><Library_Source_Abbreviation><Library_type_abbreviation>[_<Library_name]
+
+sky130 - Process Technology of the PDK sky130
+fd - SkyWater Foundry
+sc - Digital standard cells
+hd - High density
+tt - Typical Timing
+025C - 25 degree celsius Temperature
+1v80 - 1.8V Supply Voltage
+
+-----
+
+## **Demostration of the I-Verilog and GTKWave**
+
+This session takes an example of 2x1 multiplexer (verilog design and test bench) to demonstrate iverilog compilation and gtkwave waveform viewer.
+
+Change the current working directory to the directory containing the Verilog files using the following command :
+```
+cd /PD/sky130RTLDesignAndSynthesisWorkshop/verilog_files
+```
+
+Simulate the RTL design and testbench in i-verilog using the following command:
+```
+iverilog good_mux.v tb_good_mux.v 
+```
+
+The above command will compile and check for the syntax errors in both the design and testbench. Upon compiling successfully it will generate an executable file a.out.
+
+Execute the a.out using the command ./a.out , resulting in the generation of a tb_good_mux.vcd file that captures changes in the input and output values. This vcd file is given as the input to the GTKWave to view the wave form. In GTKWave drag and drop the required input and output signals to view the waveform. Since the simulation is done for long amount of time use the zoom to fit option to view the entire waveform.
+
+Commands to execute to view the waveform :
+```
+./a.out
+gtkwave tb_good_mux.vcd
+
+```
+![gtkwave_mux](https://github.com/user-attachments/assets/42476bfc-37ae-4e6d-9c31-d1c0d9bcfb68)
+
+To view the contents of the verilog files good_mux.v and tb_good_mux.v use the following command:
+```
+gvim -o good_mux.v tb_good_mux.v # -o is to open multiple windows at a time.
+```
+
+![read_files](https://github.com/user-attachments/assets/d9c21def-4125-490f-9232-463770ec8631)
+
+--------
+## **Introduction to Synthesizer**
+
+Synthesis is the process that converts RTL into a technology-specific gate-level netlist, optimized for a set of pre-defined constraints.Synthesizer is a tool used to convert the RTL from the netlist. Yosys is one such open source synthesizer. A netlist is a file that represents the gates and flip-flops required to implement the design in hardware and the ineterconnections between them which is a result of the synthesis process. Yosys is provided with both the design and its corresponding .lib file, and its task is to generate the netlist. The netlist generated is a depiction of the input design provided to Yosys, contructed using the standard cells available in the .lib file. To validate the synthesis output, the netlist is verified in a manner analogous to how the RTL design is verified. This involves using the same testbench and stimulus set to confirm that the outcomes obtained from the netlist correspond to those acquired when using the RTL design. The block diagram representation of the yosys flow and the netlist verification is shown below:
+
+![yosys_flow](https://github.com/user-attachments/assets/c9b4b3f3-c34d-4726-b7a6-b09b206cc09d)
+
+
+**Yosys Illustration:**
+
+This section explains the concept of yosys library cells and process of generating netlist using yosys tool. The library contains variety of cells with various operating speeds for different applications and avoid violations.
+
+Following represents various commands used to generate netlist for given design.
+
+```
+yosys> read_liberty -lib /PD/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> read_verilog good_mux.v
+yosys> synth -top good_mux
+yosys> abc -liberty /PD/sky130RTLDesignAndSynthesisWorkshop/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+yosys> show
+yosys> write_verilog good_mux_netlist.v
+yosys> write_verilog -noattr good_mux_netlist.v
+```
+
+**read_liberty -** Read cells from liberty file as modules into current design. The -lib switch creates empty blackbox modules.
+**read_verilog -** Loads modules from verilog file to the current design.
+**synth -** command runs the default synthesis script. The -top switch use the specified module as top module.
+**abc -** This command uses the ABC tool for technology mapping of yosys's internal gate library to a target architecture. The -lib switch liberty generate netlists for the specified cell library using the liberty file format.
+**show -** Creates a graphviz DOT file for the selected part of the design and compile it to a graphics file. It generates a schematic.
+**write_verilog -** Writes the current design to a Verilog file. The *-noattr switch skips the attributes from included in the output netlist.
+
+The synthesized design of the mux:
+
+![good_mux_schematic](https://github.com/user-attachments/assets/9745ec9c-54de-4fac-bbb8-bf3739dbcd83)
+
+The netlist generated by yosys tool for given design is shown below:
+
+![good_mux_netlist](https://github.com/user-attachments/assets/5bba7894-98a6-4be8-af19-3769e996f68b)
 
 
 -----
-**Day2: Timing Libs, Hierarchical vs Flat Synthesis, efficient Flop coding styles**
+## **Day2: Timing Libs, Hierarchical vs Flat Synthesis, efficient Flop coding styles**
 
 
 ------
-**Day3: Combinational and Sequential Optimizations**
+## **Day3: Combinational and Sequential Optimizations**
 
 
 ------
-**Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch**
+## **Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch**
 
 
 -----
