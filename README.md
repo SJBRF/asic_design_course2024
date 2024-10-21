@@ -3491,8 +3491,12 @@ Optimized Synthesized Design:
 
 The sequential logic optimisations techniques are broadly classified into two categories :
 
-    Basic Techniques a. Sequential Constant Propagation
-    Advanced Techniques a. State Optimisation b. Retiming c. Sequential Logic Cloning (Floor aware Synthesis)
+1. Basic Techniques
+   	a. Sequential Constant Propagation
+3. Advanced Techniques
+   	a. State Optimisation
+   	b. Retiming
+   	c. Sequential Logic Cloning (Floor aware Synthesis)
 
 **Illustration of Sequential Optimizsation:**
 
@@ -3526,6 +3530,12 @@ write_verilog -noattr <netlist_name.v>
 
 Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above. All the standard cells by default have negative logic for reset and since in the code reset is mentioned as positive, an inverter is used for the reset signal.
 
+**Example 2:**
+
+![dff_const2](https://github.com/user-attachments/assets/b0c852a8-9502-4c43-94f1-62aa246f86d8)
+
+The above code infers a D flip-flop with asynchronous set (reset signal is applied to set input) whereas, the optimised design infers a direct connection of VDD (logic 1) to the output q as shown above.
+
 **Example 3:**
 
 ![dff_cont3](https://github.com/user-attachments/assets/9c2aa23a-e0c5-40e7-a06d-b936ef45566c)
@@ -3537,7 +3547,7 @@ Since this code doesn't need optimisation it will infer two D flip-flop with asy
 
 ![dff_const](https://github.com/user-attachments/assets/63f197d2-1f70-4187-a0d8-9d32680ad200)
 
-The optimised design infers a direct connection of VDD (logic 1) to the output q as shown above
+The above code infers a two D flip-flop with asynchronous set(reset signal is applied to set input ), whereas the optimised design infers a direct connection of VDD (logic 1) to the output q as shown above.
 
 **Example 5:**
 
@@ -3545,11 +3555,14 @@ The optimised design infers a direct connection of VDD (logic 1) to the output q
 
 Since this code doesn't need optimisation it will infer two D flip-flop with asynchronous reset as shown above.
 
+-------
+
 ## Optimisation of Unused States
 
 **Steps to simulate and generate the netlist for the below designs**
 
 Simulation steps :
+
 ```
 iverilog <rtl_name.v> <tb_name.v>
 ./a.out
@@ -3574,7 +3587,6 @@ Following represents code and schematic of sample counter_opt design. Though the
 ![counter_opt](https://github.com/user-attachments/assets/f62c8faf-1039-4bd4-982c-ab55a6a6e85a)
 
 Consider another verilog code shown below :
-
 
 In this case since q is asserted only when count == 3'b100, all the three flip-flops are used. Hence even after optimisation , the code will infer three flops.
 
