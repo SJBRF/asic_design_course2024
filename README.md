@@ -3487,7 +3487,7 @@ Optimized Synthesized Design:
 ![mult_mod_opt2](https://github.com/user-attachments/assets/ecaa7674-341a-42fb-ac93-f39ed5d4ac96)
 
 
-## Sequential Optimisations
+## Sequential Optimizations
 
 The sequential logic optimisations techniques are broadly classified into two categories :
 
@@ -3498,7 +3498,7 @@ The sequential logic optimisations techniques are broadly classified into two ca
    	b. Retiming
    	c. Sequential Logic Cloning (Floor aware Synthesis)
 
-**Illustration of Sequential Optimizsation:**
+**Illustration of Sequential Optimization:**
 
 Steps to simulate and generate the netlist for the below designs
 
@@ -3735,7 +3735,7 @@ The simulation waveform, verilog code and synthesis result are shown below :
 ![counter_opt2](https://github.com/user-attachments/assets/e318f7d9-84aa-4d5f-b014-b2f8c63cd8ae)
 
 ------
-## **Day4- GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch**
+## **Day4- GLS, Blocking vs Non-Blocking, Synthesis Simulation Mismatch**
 
 **Gate Level Simulation**
 
