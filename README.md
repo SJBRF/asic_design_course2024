@@ -3526,17 +3526,72 @@ write_verilog -noattr <netlist_name.v>
 
 **Example 1:**
 
+The verilog code for the example 2 is given below :
+
+```
+module dff_const1(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b0;
+	else
+		q <= 1'b1;
+end
+
+endmodule
+```
+
+![dff_const1](https://github.com/user-attachments/assets/83118507-9d96-45a1-aafe-c6711c6f763f)
+
 ![dff_const1](https://github.com/user-attachments/assets/8bbf763d-4035-4fb2-9ed4-c045f960a4c5)
 
 Since this code doesn't need optimisation it will infer a D flip-flop with asynchronous reset as shown above. All the standard cells by default have negative logic for reset and since in the code reset is mentioned as positive, an inverter is used for the reset signal.
 
 **Example 2:**
 
+The verilog code for the example 2 is given below :
+
+```
+module dff_const2(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b1;
+	else
+		q <= 1'b1;
+end
+endmodule
+```
+
+![dff_const2](https://github.com/user-attachments/assets/626aae5c-30bf-4ae6-afad-551cd588540b)
+
 ![dff_const2](https://github.com/user-attachments/assets/b0c852a8-9502-4c43-94f1-62aa246f86d8)
 
 The above code infers a D flip-flop with asynchronous set (reset signal is applied to set input) whereas, the optimised design infers a direct connection of VDD (logic 1) to the output q as shown above.
 
 **Example 3:**
+The verilog code for the example 3 is given below :
+```
+module dff_const3(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+![dff_const3](https://github.com/user-attachments/assets/ee047b21-36e7-48e2-8439-ae716862007a)
 
 ![dff_cont3](https://github.com/user-attachments/assets/9c2aa23a-e0c5-40e7-a06d-b936ef45566c)
 
@@ -3544,12 +3599,58 @@ Since this code doesn't need optimisation it will infer two D flip-flop with asy
 
 
 **Example 4:**
+The verilog code for the example 4 is given below :
+
+```
+module dff_const4(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b1;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+
+![dff_const4](https://github.com/user-attachments/assets/bde83618-75db-47a7-bd60-811a3d88b3d2)
 
 ![dff_const](https://github.com/user-attachments/assets/63f197d2-1f70-4187-a0d8-9d32680ad200)
 
 The above code infers a two D flip-flop with asynchronous set(reset signal is applied to set input ), whereas the optimised design infers a direct connection of VDD (logic 1) to the output q as shown above.
 
 **Example 5:**
+The verilog code for the example 5 is given below :
+```
+module dff_const5(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b0;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+![dff_const5](https://github.com/user-attachments/assets/74c2325b-3d53-4821-b5f8-8a8f52c46761)
 
 ![dff_const5](https://github.com/user-attachments/assets/85501551-872d-4ce1-8cfd-b7b07a0093a4)
 
@@ -3581,16 +3682,55 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 write_verilog -noattr <netlist_name.v>
 ```
+**Example 1**
+Consider the verilog code shown below :
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count[0];
 
-Following represents code and schematic of sample counter_opt design. Though the code contains 3bit register, but still yosys will retain logic only visible in required final output. 
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
+
+Following represents simulation waveform, verilog code and schematic of sample counter_opt design. Though the code contains 3bit register, but still yosys will retain logic only visible in required final output. 
+
+![counter_opt](https://github.com/user-attachments/assets/7b8ed077-e8d1-48f1-99ff-afe06e69322d)
 
 ![counter_opt](https://github.com/user-attachments/assets/f62c8faf-1039-4bd4-982c-ab55a6a6e85a)
 
+
+**Example2**
+
 Consider another verilog code shown below :
+```
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count==3'b100;
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
 
 In this case since q is asserted only when count == 3'b100, all the three flip-flops are used. Hence even after optimisation , the code will infer three flops.
 
-The verilog code and synthesis result are shown below :
+The simulation waveform, verilog code and synthesis result are shown below :
+
+![count_opt2](https://github.com/user-attachments/assets/60ec4251-0390-4577-9728-9f63dce7690a)
 
 ![counter_opt2](https://github.com/user-attachments/assets/e318f7d9-84aa-4d5f-b014-b2f8c63cd8ae)
 
