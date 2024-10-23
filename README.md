@@ -4066,6 +4066,15 @@ In the above waveforms, we can see the following signals:
     OUT: This is a real datatype wire which can simulate analog values. It is the output wire real OUT signal of the DAC module. This signal comes from the DAC.
 
 The pre synthesis simulation waveforms and the post synthesis simulation waveforms were found to be identical.
+The pre synthesis simulation waveforms are shown here for reference:
+
+**clk and reset:**
+
+![clk](https://github.com/user-attachments/assets/7c213204-0b2a-4fb3-9861-ce3517821dd3)
+
+**output signals:**
+
+![pre_synth_sim_output](https://github.com/user-attachments/assets/99590c42-6bf0-4781-8ddd-32fb96687845)
 
 
 ---------
