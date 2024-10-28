@@ -38,7 +38,8 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
     * [Day3: Combinational and Sequential Optimizations](#Day3--Combinational-and-Sequential-Optimizations)
     * [Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch](#Day4--GLS,-Blocking-vs-Non-Blocking,-Synthesis-Simulation-Mismatch)
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
-    
+12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoc](#Static-Timing-Analysis-(STA)-of-VSDBabySoc)
+        
 - [References](#References)
   
   	
@@ -4078,6 +4079,110 @@ The pre synthesis simulation waveforms are shown here for reference:**
 
 
 ---------
+
+## Static Timing Analysis (STA) of VSDBabySoc:
+
+Static timing analysis (STA) is a method of validating the timing performance of a design by checking all possible paths for timing violations. STA breaks a design down into timing paths, calculates the signal propagation delay along each path, and checks for violations of timing constraints inside the design and at the input/output interface.
+When performing timing analysis, STA first breaks down the design into timing paths. Each timing path consists of the following elements:
+**1. Startpoint:** The start of a timing path where data is launched by a clock edge or where the data must be available at a specific time. Every startpoint must be either an input port or a register clock pin.
+**2. Combinational logic network:** Elements that have no memory or internal state. Combinational logic can contain AND, OR, XOR, and inverter elements, but cannot contain flip-flops, latches, registers, or RAM.
+**3. Endpoint:** The end of a timing path where data is captured by a clock edge or where the data must be available at a specific time. Every endpoint must be either a register data input pin or an output port.
+
+The STA for the VSDBabysoc design was done with the below constraints stored in the .sdc file:
+```
+# Create clock with clock period
+create_clock [get_pins pll/CLK] -name clk -period 11.5 -waveform {0 5.75} 
+
+# Set loads
+set_load -pin_load 0.5 [get_ports OUT] 
+set_load -min -pin_load 0.5 [get_ports OUT] 
+
+# Set clock latency
+set_clock_latency 1 [get_clocks clk] 
+set_clock_latency -source 2 [get_clocks clk] 
+
+# Set clock uncertainty
+set_clock_uncertainty 0.575 [get_clocks clk]  ; # 5% of clock period for setup
+set_clock_uncertainty -hold 0.92 [get_clocks clk] ; # 8% of clock period for hold
+
+# Set maximum delay
+set_max_delay 11.5 -from [get_pins dac/OUT] -to [get_ports OUT] 
+
+# Set input delay for VCO_IN
+set_input_delay -clock clk -max 4 [get_ports VCO_IN] 
+set_input_delay -clock clk -min 1 [get_ports VCO_IN] 
+
+# Set input delay for ENb_VCO
+set_input_delay -clock clk -max 4 [get_ports ENb_VCO] 
+set_input_delay -clock clk -min 1 [get_ports ENb_VCO] 
+
+# Set input delay for ENb_CP
+set_input_delay -clock clk -max 4 [get_ports ENb_CP] 
+set_input_delay -clock clk -min 1 [get_ports ENb_CP] 
+
+# Set input transition for VCO_IN
+set_input_transition -max 0.575 [get_ports VCO_IN] ; # 5% of clock for setup 
+set_input_transition -min 0.92 [get_ports VCO_IN] ; #  8% of clock for setup 
+
+# Set input transition for ENb_VCO
+set_input_transition -max 0.575 [get_ports ENb_VCO] ; #  5% of clock for setup 
+set_input_transition -min 0.92 [get_ports ENb_VCO] ; #   8% of clock for setup 
+
+# Set input transition for ENb_CP
+set_input_transition -max 0.575 [get_ports ENb_CP] ; #  5% of clock for setup 
+set_input_transition -min 0.92 [get_ports ENb_CP] ; #   8% of clock for setup 
+```
+
+The commands for executing the STA through OpenSTA are:
+```
+~cd VSDBabySoC/src/module/my_riscv_sta
+~sta
+```
+This opens the sta tool in the design folder location. ones the sta tool is invoked below commands were executed to generate the timings for worst case and best case delays i.e. to calculate the setup and hold slacks.
+
+```
+read_liberty -min sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -max sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -min avsdpll.lib
+read_liberty -max avsdpll.lib
+read_liberty -min avsddac.lib
+read_liberty -max avsddac.lib
+read_verilog  vsdbabysoc.synth.v
+link_design   vsdbabysoc
+read_sdc      vsdbabysoc_synthesis.sdc
+report_checks -path_delay max -format full #for worst case setup slack
+report_checks -path_delay min -format full #for best case hold slack
+```
+The screenshot of the timing reports for reg2reg delay calculation are given below
+**1: worst case setup slack:**
+
+![setup_worst_case](https://github.com/user-attachments/assets/41fd3c9c-15dc-4c7a-bff2-90ad37db71a6)
+
+**2: Best case hold slack:**
+
+![hold_check_bestcase](https://github.com/user-attachments/assets/0f3b3f4b-b7b0-46d6-90f2-60c5a767aba5)
+
+-----
+The slacks in both the cases were found to be negative. That means the design needs to be modified to reduce the path delays or the clock frequency under consideration needs to be increased to match the delays.
+
+The slack calculations were also carried out for a random reg2reg data path in the riscv design and the screenshots of the setup and hold slacks for the same are shown below. The data path was chosen from the synthesis output file by following data signal originating from 1 DFF and reaching the second DFF.
+The commands for giving startpoint and endpoint as an input for genertaing slack are:
+```
+# for setup, startpoint and endpoint can be modified based on analysis
+report_checks -path_delay max -format full -from [get_pins core_pri/_17105_/CLK] -to [get_pins core_pri/_16578_/D] 
+
+# for hold, startpoint and endpoint can be modified based on analysis
+report_checks -path_delay min -format full -from [get_pins core_pri/_17105_/CLK] -to [get_pins core_pri/_16578_/D]
+```
+
+**1. setup slack:**
+![setup_random](https://github.com/user-attachments/assets/f8ef82ac-e759-4b3b-84e7-74f4641d3573)
+
+
+**2. hold slack:**
+![hold_check_random](https://github.com/user-attachments/assets/6a1bb736-d2ec-4040-8e71-6426eb16dbdd)
+
+-----
 ## References
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
@@ -4090,6 +4195,8 @@ The pre synthesis simulation waveforms are shown here for reference:**
 *  https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
 *  https://github.com/bhargav-vlsi/ASIC-Design-IIITB.git
 *  https://github.com/KanishR1/Introduction-to-ASIC-Flow.git
+*  https://github.com/Subhasis-Sahu/SFAL-VSD/blob
+*  Udemy courses VSD - Static Timing Analysis - I and VSD - Static Timing Analysis - II
   
 
 ------
