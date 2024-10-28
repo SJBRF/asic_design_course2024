@@ -38,7 +38,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
     * [Day3: Combinational and Sequential Optimizations](#Day3--Combinational-and-Sequential-Optimizations)
     * [Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch](#Day4--GLS,-Blocking-vs-Non-Blocking,-Synthesis-Simulation-Mismatch)
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
-12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoc](#Static-Timing-Analysis-(STA)-of-VSDBabySoc)
+12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoC](#Static-Timing-Analysis-(STA)-of-VSDBabySoC)
         
 - [References](#References)
   
@@ -4080,7 +4080,7 @@ The pre synthesis simulation waveforms are shown here for reference:**
 
 ---------
 
-## Static Timing Analysis (STA) of VSDBabySoc
+## Static Timing Analysis (STA) of VSDBabySoC
 
 Static timing analysis (STA) is a method of validating the timing performance of a design by checking all possible paths for timing violations. STA breaks a design down into timing paths, calculates the signal propagation delay along each path, and checks for violations of timing constraints inside the design and at the input/output interface.
 When performing timing analysis, STA first breaks down the design into timing paths. Each timing path consists of the following elements:
