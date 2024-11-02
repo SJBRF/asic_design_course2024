@@ -39,6 +39,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
     * [Day4: GLS, Blocking vs Non-Blocking, Synthesis-Simulation Mismatch](#Day4--GLS,-Blocking-vs-Non-Blocking,-Synthesis-Simulation-Mismatch)
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
 12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoC](#Static-Timing-Analysis-(STA)-of-VSDBabySoC)
+13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
         
 - [References](#References)
   
@@ -4181,6 +4182,92 @@ report_checks -path_delay min -format full -from [get_pins core_pri/_17105_/CLK]
 
 **2. hold slack:**
 ![hold_check_random](https://github.com/user-attachments/assets/6a1bb736-d2ec-4040-8e71-6426eb16dbdd)
+
+-----
+
+## Synthesize VsdBabySoC design using different PVT Corner Library Files
+------
+In this lab, we will be checking for the worst setup/hold slacks using different PVT Corner library files.
+
+* PVT (Process, Voltage, Temperature) are the three key factors that impact the performance and behavior of integrated circuits in VLSI design. Here is a summary of how each of these factors affects circuit design:
+
+**1. Process (P):**
+Process variation refers to deviations in the semiconductor fabrication process, such as variations in impurity concentration, oxide thickness, and transistor dimensions. These process variations can cause changes in transistor parameters like threshold voltage, mobility, and current drive, which in turn impact the circuit delay and performance. Circuits designed with a "fast" process will have lower delays, while "slow" process corners will have higher delays.
+
+**2. Voltage (V):**
+The supply voltage of the chip can deviate from the optimal value during operation due to factors like noise, IR drop, and voltage regulator variations. Higher supply voltage leads to increased current and faster charging/discharging of capacitances, resulting in lower delays. Lower voltage has the opposite effect.
+
+**3. Temperature (T):**
+The operating temperature of the chip can vary widely depending on the environment and power dissipation within the chip. Higher temperatures generally decrease carrier mobility, leading to increased delays.
+
+We must ensure that our design is functioning properly for all PVT corners. For this, we use STA using the following procedure.
+We run the script shown below. This script reads in all the library files one by one from the specified directory and is used on our VSDBabySoC design. The constraints file from the earlier lab is also read(clock-11.55 ns with 5% uncertainity for setup and 8% uncertainity for hold).
+
+```
+set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
+set list_of_lib_files(2) "sky130_fd_sc_hd__tt_100C_1v80.lib"
+set list_of_lib_files(3) "sky130_fd_sc_hd__ff_100C_1v65.lib"
+set list_of_lib_files(4) "sky130_fd_sc_hd__ff_100C_1v95.lib"
+set list_of_lib_files(5) "sky130_fd_sc_hd__ff_n40C_1v56.lib"
+set list_of_lib_files(6) "sky130_fd_sc_hd__ff_n40C_1v65.lib"
+set list_of_lib_files(7) "sky130_fd_sc_hd__ff_n40C_1v76.lib"
+set list_of_lib_files(8) "sky130_fd_sc_hd__ff_n40C_1v95.lib"
+set list_of_lib_files(9) "sky130_fd_sc_hd__ss_100C_1v40.lib"
+set list_of_lib_files(10) "sky130_fd_sc_hd__ss_100C_1v60.lib"
+set list_of_lib_files(11) "sky130_fd_sc_hd__ss_n40C_1v28.lib"
+set list_of_lib_files(12) "sky130_fd_sc_hd__ss_n40C_1v35.lib"
+set list_of_lib_files(13) "sky130_fd_sc_hd__ss_n40C_1v40.lib"
+set list_of_lib_files(14) "sky130_fd_sc_hd__ss_n40C_1v44.lib"
+set list_of_lib_files(15) "sky130_fd_sc_hd__ss_n40C_1v60.lib"
+set list_of_lib_files(16) "sky130_fd_sc_hd__ss_n40C_1v76.lib"
+
+for {set i 1} {$i <= [array size list_of_lib_files]} {incr i} {
+read_liberty ./timing_libs/$list_of_lib_files($i)
+read_liberty -min avsdpll.lib
+read_liberty -max avsdpll.lib
+read_liberty -min avsddac.lib
+read_liberty -max avsddac.lib
+read_verilog  vsdbabysoc.synth.v
+link_design vsdbabysoc
+read_sdc vsdbabysoc_synthesis.sdc
+check_setup -verbose
+report_checks -path_delay min_max -fields {nets cap slew input_pins fanout} -digits {4} > ./sta_output/min_max_$list_of_lib_files($i).txt
+
+exec echo "$list_of_lib_files($i)" >> ./sta_output/sta_worst_max_slack.txt
+report_worst_slack -max -digits {4} >> ./sta_output/sta_worst_max_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> ./sta_output/sta_worst_min_slack.txt
+report_worst_slack -min -digits {4} >> ./sta_output/sta_worst_min_slack.txt
+
+exec echo "$list_of_lib_files($i)" >> ./sta_output/sta_tns.txt
+report_tns -digits {4} >> ./sta_output/sta_tns.txt
+
+exec echo "$list_of_lib_files($i)" >> ./sta_output/sta_wns.txt
+report_wns -digits {4} >> ./sta_output/sta_wns.txt
+}
+```
+
+The script generates reports for each library file. A table comprising of the worst setup and hold slacks from the reports is shown below: 
+
+![excel_screenshot](https://github.com/user-attachments/assets/daa1aa90-c164-44ad-94ae-d829eae52ef3)
+
+-----
+From the table, we have plotted the below graphs:
+
+**1: Worst Setup Slack (WNS):**
+
+![WNS](https://github.com/user-attachments/assets/4e977df4-b704-46c5-8c67-7f6211a477fc)
+
+
+**2: Worst Hold Slack (WHS):**
+
+![WHS](https://github.com/user-attachments/assets/cd897f30-fcff-4cea-b4b2-d0d5af9b579d)
+
+
+**From the graphs we can infer:**
+
+Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
+Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 -----
 ## References
