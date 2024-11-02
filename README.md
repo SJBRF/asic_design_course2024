@@ -4266,8 +4266,8 @@ From the table, we have plotted the below graphs:
 
 **From the graphs we can infer:**
 
-Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
-Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
+* Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
+* Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 -----
 ## References
@@ -4283,7 +4283,9 @@ Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 *  https://github.com/bhargav-vlsi/ASIC-Design-IIITB.git
 *  https://github.com/KanishR1/Introduction-to-ASIC-Flow.git
 *  https://github.com/Subhasis-Sahu/SFAL-VSD/blob
-*  Udemy courses VSD - Static Timing Analysis - I and VSD - Static Timing Analysis - II
+*  https://www.udemy.com/course/vlsi-academy-sta-checks/?couponCode=3D425F2B9705E44298A9
+*  https://www.udemy.com/course/vlsi-academy-sta-checks-2/?couponCode=952614A18B598B2B0623*  
+*  https://github.com/arunkpv/vsd-hdp/blob/main/docs/Day_19.md#day-19---pvt-corner-analysis-post-synthesis-timing-of-the-risc-v-cpu-design
   
 
 ------
