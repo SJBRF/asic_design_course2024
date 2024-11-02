@@ -4201,7 +4201,7 @@ The supply voltage of the chip can deviate from the optimal value during operati
 The operating temperature of the chip can vary widely depending on the environment and power dissipation within the chip. Higher temperatures generally decrease carrier mobility, leading to increased delays.
 
 We must ensure that our design is functioning properly for all PVT corners. For this, we use STA using the following procedure.
-We run the script shown below. This script reads in all the library files one by one from the specified directory and is used on our VSDBabySoC design. The constraints file from the earlier lab is also read(clock-11.55 ns with 5% uncertainity for setup and 8% uncertainity for hold).
+We run the script shown below. This script reads in all the library files one by one from the specified directory and is used on our VSDBabySoC design. The constraints file from the earlier lab is also read(clock-11.50 ns with 5% of clock period for clock uncertainity and data transition delay for setup and 8% of clock period for clock uncertainity and data transition delay for hold).
 
 ```
 set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
@@ -4246,6 +4246,9 @@ exec echo "$list_of_lib_files($i)" >> ./sta_output/sta_wns.txt
 report_wns -digits {4} >> ./sta_output/sta_wns.txt
 }
 ```
+The SDC file used for generating clock and data constraints is given below:
+
+![SDC](https://github.com/user-attachments/assets/f3718c3f-9e39-4ee4-bcab-bdeb54793f3a)
 
 The script generates reports for each library file. A table comprising of the worst setup and hold slacks from the reports is shown below: 
 
