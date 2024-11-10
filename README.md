@@ -4723,8 +4723,126 @@ plot y vs time a
 ```
 Screenshots of ngspice run
 
+![ngspice_open](https://github.com/user-attachments/assets/7d46d6f6-ae73-4fc5-b141-00283fb7e85c)
 
-Screenshot from 2024-03-19 00-34-11
+![ngspice_sim2_plot](https://github.com/user-attachments/assets/c46fbba7-de84-42bb-8157-1c7bcb109136)
+
+Screenshot of generated plot
+![ngspice_gen_plot1](https://github.com/user-attachments/assets/741d6914-eff8-4bf5-88df-4b2d2486d1bb)
+
+**Rise transition time calculation**
+	Rise Transition Time  = Time taken for output to rise to 80% − Time taken for output to rise to 20%
+	20% of output (3.3V) = 0.66V
+	20% of output (3.3V) = 2.64V
+
+20% Screenshots
+
+![20%_screenshot](https://github.com/user-attachments/assets/3de8a797-9dc4-460e-8780-05d8cc77d205)
+
+80% Screenshot
+![80%screenshot](https://github.com/user-attachments/assets/75d75b25-0e20-40c5-8886-d3bc5ea22e9b)
+
+ 	Rise Transition Time = 2.24435 - 2.1815 = 0.06285 ns = 62.85 ps
+
+Fall Transition Time  = Time taken for output to fall to 80% − Time taken for output to fall to 20%
+	20% of output (3.3V) = 0.66V
+	20% of output (3.3V) = 2.64V
+
+20% Screenshots
+![output_fall_20%](https://github.com/user-attachments/assets/9bd92b92-8a5f-4eee-80c8-bb10149bb494)
+
+
+80% Screenshot
+![output_fall_80%](https://github.com/user-attachments/assets/c623c8b2-d937-4970-929d-140ef70f5e7e)
+
+ 	Fall Transition Time = 4.09488 - 4.05239 = 0.04249 ns = 42.49 ps
+
+Rise Cell Delay Calculation
+	Rise cell delay = Time taken by output to rise to 50% − Time taken by input to fall to 50% 
+	50 % of 3.3V = 1.65V 
+
+50% Screenshots
+![rise_time_50%](https://github.com/user-attachments/assets/a87f7b01-0f02-4d8f-a681-aeb8afbc7494)
+
+	Rise cell delay = 2.21 - 2.14993 = 0.06007 ns = 60.07 ps
+
+Fall Cell Delay Calculation
+	Fall cell delay = Time taken by output to fall to 50% − Time taken by input to rise to 50% 
+	50 % of 3.3V = 1.65V
+
+50% Screenshots
+
+![fall_time_50%](https://github.com/user-attachments/assets/53f84107-7fd5-427f-a7a3-b2277b03df93)
+
+	Fall cell delay = 4.07713−4.05 = 0.02713 ns = 27.13 ps
+
+-----
+6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+
+
+Link to Sky130 Periphery rules: https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+
+Commands to download and view the corrupted skywater process magic tech file and associated files to perform drc corrections
+```
+# Change to home directory
+cd
+
+# Command to download the lab files
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+# Since lab file is compressed command to extract it
+tar xfz drc_tests.tgz
+
+# Change directory into the lab folder
+cd drc_tests
+
+# List all files and directories present in the current directory
+ls -al
+
+# Command to view .magicrc file
+gvim .magicrc
+
+# Command to open magic tool in better graphics
+magic -d XR &
+```
+Screenshots of commands run
+![part6_1](https://github.com/user-attachments/assets/aa1ddf70-1bc8-4103-8af5-5d3daca89e49)
+
+
+Screenshot of .magicrc file
+![part6_1_file](https://github.com/user-attachments/assets/8f4130a2-44b7-4d20-9c6b-550064d5c5b4)
+
+**Incorrectly implemented poly.9 simple rule correction**
+
+Screenshot of poly rules  
+![part6_periphery_rules](https://github.com/user-attachments/assets/d981f849-3d57-428d-b18c-21a8d213631f)
+
+Incorrectly implemented poly.9 rule no drc violation even though spacing < 0.48u
+
+![part6_polyDRC_violation](https://github.com/user-attachments/assets/4c870789-2ffb-4074-a345-90d1ce64dc84)
+
+New commands inserted in sky130A.tech file to update drc
+
+![part6_newDRCrule1](https://github.com/user-attachments/assets/3c7592b0-96fe-4423-b25b-939f62725731)
+
+![part6_drc_rule_new2](https://github.com/user-attachments/assets/1fa6271b-1862-4e98-a4b0-b8ef8230ae75)
+
+Commands to run in tkcon window
+```
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+Screenshot of magic window with rule implemented
+
+![Uploading part6_drc_rule_check2.png…]()
+
+
 ----
 ## Day4: Pre-Layout timing analysis and Importance of good clock tree :
 
