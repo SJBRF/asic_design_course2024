@@ -40,6 +40,12 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
 12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoC](#Static-Timing-Analysis-(STA)-of-VSDBabySoC)
 13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
+14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Advanced-Physical-Design-Using-Openlane/Sky130-Wokshop)
+    *[Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA,-OpenLANE-and-Sky130-PDK )
+    *[Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
+    *[Day3: Design Library Cell Using Magic Layout and Cell characterization](#Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
+    *[Day4: Pre-Layout timing analysis and Importance of good clock tree](#Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
+    *[Day5: Final steps for RTL2GDS using tritonRoute and openSTA](#Final-steps-for-RTL2GDS-using-tritonRoute-and-openSTA)
         
 - [References](#References)
   
@@ -4271,6 +4277,230 @@ From the table, we have plotted the below graphs:
 
 * Worst setup slack - sky130_fd_sc_hd__ss_n40C_1v28 PVT Corner library file
 * Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
+
+-----
+## Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop
+
+## Theory:
+
+**Package**
+
+* In any embedded board we have seen, the part of the board we consider as the chip is only the PACKAGE of the chip which is nothing but a protective layer or packet bound over the actual chip and the actual manufatured chip is usually present at the center of a package wherein, the connections from package is fed to the chip by WIRE BOUND method which is none other than basic wired connection.
+
+  ![image](https://github.com/user-attachments/assets/190b4c19-7a10-4526-a449-c61955ef81e9)
+
+  ![image](https://github.com/user-attachments/assets/140d21ef-072e-44ba-9412-fe6485b6e3cf)
+
+  ![image](https://github.com/user-attachments/assets/8f941ff2-8377-44df-9c29-829f2d656ccd)
+
+
+**Chip**
+
+* Now, taking a look inside the chip, all the signals from the external world to the chip and vice versa is passed through PADS. The area bound by the pads is CORE where all the digital logic of the chip is placed. Both the core and pads make up the DIE which is the basic manufacturing unit in regards to semiconductor chips.
+
+![image](https://github.com/user-attachments/assets/07531d75-0042-4124-8e5d-e6a1315bdfa1)
+
+
+**Foundty**
+
+* Foundry is the place where the semiconductor chips are manufactured and FOUNDRY IP's are Intellectual Properties based on a specific foundry and these IP's require a specific level of intelligence to be produced whereas, repeatable digital logic blocks are called MACROS.
+
+![image](https://github.com/user-attachments/assets/b9fd0168-4a71-4e9a-9152-f7bd8a3f9cb6)
+
+**ISA (Intruction Set Architecture)**
+
+* A C program which has to be run on a specific hardware layout which is the interior of a chip in your laptop, there is certain flow to be followed.
+* Initially, this particular C program is compiled in it's assembly language program which is nothing but RISC-V ISA (Reduced Instruction Set Compting - V Intruction Set Architecture).
+* Following this, the assembly language program is then converted to machine language program which is the binary language logic 0 and 1 which is understood by the hardware of the computer.
+* Directly after this, we've to implement this RISC-V specification using some RTL (a Hardware Description Language). Finally, from the RTL to Layout it is a standard PnR or RTL to GDSII flow.
+
+![image](https://github.com/user-attachments/assets/f9f9c0ce-b464-4efc-92f2-3b40a0bff34a)
+
+
+* For an application software to be run on a hardware there are several processes taking place. To begin with, the apps enters into a block called system software and it converts the application program to binary language. There are various layers in system software in which the major layers or components are OS (Operating System), Compiler and Assembler.
+* At first the OS outputs are small function in C, C++, VB or Java language which are taken by the respective compiler and converted into instructions and the syntax of these instructions varies with the hardware architecture on which the system is implemented.
+* Then, the job of the assembler is to take these instructions and convert it into it's binary format which is basically called as a machine language program. Finally, this binary language is fed to the hardware and it understands the specific functions it has to perform based on the binary code it receives.
+
+![image](https://github.com/user-attachments/assets/e7d4317a-5dcc-48bf-b20d-d48465951c12)
+
+For example, if we take a stopwatch app on RISC-V core, then the output of the OS could be a small C function which enters into the compiler and we get output RISC-V instructions following this, the output of the assembler will be the binary code which enters into your chip layout.
+
+![image](https://github.com/user-attachments/assets/f56f5088-e623-4030-be95-0dd48c28f275)
+
+* For the above stopwatch the following are the input and output of the compiler and assembler
+
+![image](https://github.com/user-attachments/assets/b3b41fed-fb8c-43eb-af67-3f845f0e1f2d)
+
+* The output of the compiler are instructions and the output of the assembler is the binary pattern. Now, we need some RTL (a Hardware Description Language) which understands and implements the particular instructions. Then, this RTL is synthesised into a netlist in form of gates which is fabricated into the chip through a physical design implementation.
+
+![image](https://github.com/user-attachments/assets/b330eb3e-1e89-4da3-bcaa-e95fe6b118e3)
+
+**Open-source Implementation**
+
+    For open-source ASIC design implemantation, we require the following enablers to be readily available as open-source versions. They are:-
+
+*	RTL Designs
+*	EDA Tools
+*	PDK Data
+
+
+* Initially in the early ages, the design and fabrication of IC's were tightly coupled and were only practiced by very few companies like TI, Intel, etc.
+* In 1979, Lynn Conway and Carver Mead came up with an idea to saperate the design from the fabrication and to do this they inroduced structured design methodologies based on the λ-based design rules and published the first VLSI book "Introduction to VLSI System" which started the VLSI education.
+* This methodology resulted in the emergence of the design only companies or "Fabless Companies" and fabrication only companies that we usually refer to as "Pure Play Fabs". The inteface between the designers and the fab by now became a set of data files and documents, that are reffered to as the "Process Design Kits (PDKs)".
+* The PDK include but not limited to Device Models, Technology Information, Design Rules, Digital Standard Cell Libraries, I/O Libraries and many more.
+* Since, the PDK contained variety of informations, and so they were distributed only under NDAs (Non-Disclosure Agreements) which made it in-accessible to the public.
+* Recently, Google worked out an agreement with skywater to open-source the PDK for the 130nm process by skywater Technology, as a result on 30 June 2020 Google released the first ever open-source PDK.
+
+![image](https://github.com/user-attachments/assets/e9fa7771-ef5d-4755-9f3f-18856e722039)
+
+ASIC design is a complex step that involves tons of steps, various methodologies and respective EDA tools which are all required for successful ASIC implementation which is achieved though an ASIC flow which is nothing but a piece of software that pulls different tools togather to carry out the design process.
+
+![image](https://github.com/user-attachments/assets/7029c60a-251b-4fee-8c9c-1c3dad0abce3)
+
+**OpenLANE Open-source ASIC Design Implementation Flow**
+
+    The main objective of the ASIC Design Flow is to take the design from the RTL (Register Transfer Level) all the way to the GDSII, which is the format used for the final fabrication layout.
+
+![image](https://github.com/user-attachments/assets/288edd23-d1e7-49a7-9dc6-7a93fc019575)
+
+* Synthesis is the process of convertion or translation of design RTL into circuits made out of Standard Cell Libraries (SCL) the resultant circuit is described in HDL and is usually reffered to as the Gate-Level Netlist.
+* Gate-Level Netlist is functionally equivalent to the RTL.
+
+![image](https://github.com/user-attachments/assets/6102211f-3af2-491a-a368-3919bb8e45a2)
+
+
+* The fundemental building blocks which are the standard cells have regular layouts.
+* Each cell has different views/models which are utilised by different EDA tools like liberty view with electrical models of the cells, HDL behavioral models, SPICE or CDL views of the cells, Layout view which include GDSII view which is the detailed view and LEF view which is the abstract view.
+
+![image](https://github.com/user-attachments/assets/1fcaa7bf-b7c6-4fc4-a7cd-5747a6045682)
+
+* Chip Floor Planning
+
+![image](https://github.com/user-attachments/assets/ddb33f57-72b5-4dac-a9bf-fde5782b6bae)
+
+* Macro Floor Planning
+
+![image](https://github.com/user-attachments/assets/ab93e598-e4b4-4b61-adee-80f51fb9c4c4)
+
+* Power Planning typically uses upper metal layers for power distribution since thay are thicker than lower metal layers and so have lower resistance and PP is done to avoid electron migration and IR drops.
+  
+![image](https://github.com/user-attachments/assets/be885ab5-06ca-47f9-ac4c-f2625b63453e)
+
+* Placement
+  
+![image](https://github.com/user-attachments/assets/4e0c6519-c1a8-4be3-bfe5-9c2b8a70e139)
+
+* Global placement provide approximate locations for all cells based on connectivity but in this stage the cells may be overlapped on each other and in detailed placement the positions obtained from global placements are minimally altered to make it legal (non-overlapping and in site-rows)
+
+![image](https://github.com/user-attachments/assets/01915ce1-6694-4eee-8df3-2b37039b7809)
+
+* Clock Tree Synthesis
+
+![image](https://github.com/user-attachments/assets/060cf6a0-1ef9-4a31-abc2-799487dd8d06)
+
+* Clock skew is the time difference in arrival of clock at different components.
+* Routing
+
+![image](https://github.com/user-attachments/assets/fc4baa91-86ec-4568-b847-c17d6e72b3ea)
+
+* skywater PDK has 6 routing layers in which the lowest layer is called the local interconnect layer which is a Titanium Nitride layer the following 5 layers are all Aluminium layers.
+
+![image](https://github.com/user-attachments/assets/2c6125b9-91ff-4aa0-8fa6-c52605fa0ca1)
+
+* Global and Detailed Routing
+
+![image](https://github.com/user-attachments/assets/459f1066-49d8-41b6-97a0-c133c943fb8d)
+
+* Once done with the routing the final layout can be generated which undergoes various Sign-Off checks.
+* Design Rules Checking (DRC) which verifies that the final layout honours all design fabrication rules.
+* Layout Vs Schematic (LVS) which verifies that the final layout functionality matches the gate-level netlist that we started with.
+* Static Timing Analysis (STA) to verify that the design runs at the designated clock frequency.
+
+![image](https://github.com/user-attachments/assets/8ab63b14-c047-488f-adb9-e401c4ce72cc)
+
+----
+## Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK :
+
+Tasks:
+1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+2. Calculate the flop ratio.
+
+   The Flop ratio can be calculated as follows:
+
+\[
+\text{Flop Ratio} = \frac{\text{Number of D Flip-Flops}}{\text{Total Number of Cells}}
+\]
+
+The percentage of Flop Ratio = Flop Ratio * 100
+
+## 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
+--------
+Commands to invoke the OpenLANE flow and perform synthesis
+```
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# alias docker='docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) efabless/openlane:v0.21'
+# Since we have aliased the long command to 'docker' we can invoke the OpenLANE flow docker sub-system by just running this command
+docker
+```
+```
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Exit from OpenLANE flow
+exit
+
+# Exit from OpenLANE flow docker sub-system
+exit
+```
+Screenshots:
+![section1_openlane](https://github.com/user-attachments/assets/d7d1493a-81a5-4e86-a305-486499672b39)
+
+![openlane2](https://github.com/user-attachments/assets/af215c68-4164-4006-bfe0-1599b831d46d)
+
+![synthesis_completed](https://github.com/user-attachments/assets/44a14519-c005-4bf4-ac97-5411543d7c7b)
+
+![syn_report](https://github.com/user-attachments/assets/eafa45ee-1804-46fa-99fe-beda59a98c31)
+
+**2. Calculate the Flop ratio:**
+
+![cell](https://github.com/user-attachments/assets/26886eff-9b16-4ace-8c00-b75d70e17063)
+
+![dff_ratio](https://github.com/user-attachments/assets/83645358-c300-4431-b52c-362891bcf473)
+
+Calculation of Flop Ratio and DFF % from synthesis statistics report file
+
+	Flop Ratio = 1613/14876 = 0.108429685
+        Percentage of Flip Flops = 0.108429685 ∗ 100 = 10.84296854%
+	
+-----
+## Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell :
+
+-----
+
+## Day3: Design Library Cell Using Magic Layout and Cell characterization :
+
+
+----
+## Day4: Pre-Layout timing analysis and Importance of good clock tree :
+
+
+
+-----
+## Day5: Final steps for RTL2GDS using tritonRoute and openSTA :
+
+
+
 
 -----
 ## References
