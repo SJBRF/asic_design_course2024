@@ -4280,7 +4280,8 @@ From the table, we have plotted the below graphs:
 * Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 -----
-## Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop
+## Lab13: 
+## Advanced Physical Design Using Openlane/Sky130 Wokshop
 
 ## Theory:
 
@@ -4302,7 +4303,7 @@ From the table, we have plotted the below graphs:
 ![image](https://github.com/user-attachments/assets/07531d75-0042-4124-8e5d-e6a1315bdfa1)
 
 
-**Foundty**
+**Foundry**
 
 * Foundry is the place where the semiconductor chips are manufactured and FOUNDRY IP's are Intellectual Properties based on a specific foundry and these IP's require a specific level of intelligence to be produced whereas, repeatable digital logic blocks are called MACROS.
 
@@ -4421,7 +4422,7 @@ ASIC design is a complex step that involves tons of steps, various methodologies
 
 ----
 **Day1:**
-## Inception of open-source EDA, OpenLANE and Sky130 PDK :
+## Inception of open-source EDA, OpenLANE and Sky130 PDK:
 
 Tasks:
 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
@@ -4619,7 +4620,8 @@ exit
 ```
 
 -----
-## Day3: Design Library Cell Using Magic Layout and Cell characterization :
+**Day3:**
+## Design Library Cell Using Magic Layout and Cell characterization:
 
 Tasks:
    1. Clone custom inverter standard cell design from github repository: Standard cell design and characterization using OpenLANE flow.
@@ -4844,12 +4846,14 @@ Screenshot of magic window with rule implemented
 
 
 ----
-## Day4: Pre-Layout timing analysis and Importance of good clock tree :
+**Day4:**
+## Pre-Layout timing analysis and Importance of good clock tree:
 
 
 
 -----
-## Day5: Final steps for RTL2GDS using tritonRoute and openSTA :
+**Day5:**
+## Final steps for RTL2GDS using tritonRoute and openSTA:
 
 
 
