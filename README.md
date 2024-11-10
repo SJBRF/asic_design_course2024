@@ -42,11 +42,11 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
 14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Advanced-Physical-Design-Using-Openlane/Sky130-Wokshop)
     
-    *[Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA,-OpenLANE-and-Sky130-PDK)
-    *[Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
-    *[Day3: Design Library Cell Using Magic Layout and Cell characterization](#Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
-    *[Day4: Pre-Layout timing analysis and Importance of good clock tree](#Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
-    *[Day5: Final steps for RTL2GDS using tritonRoute and openSTA](#Final-steps-for-RTL2GDS-using-tritonRoute-and-openSTA)
+    * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA,-OpenLANE-and-Sky130-PDK)
+    * [Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
+    * [Day3: Design Library Cell Using Magic Layout and Cell characterization](#Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
+    * [Day4: Pre-Layout timing analysis and Importance of good clock tree](#Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
+    * [Day5: Final steps for RTL2GDS using tritonRoute and openSTA](#Final-steps-for-RTL2GDS-using-tritonRoute-and-openSTA)
         
 - [References](#References)
   
@@ -4621,7 +4621,110 @@ exit
 -----
 ## Day3: Design Library Cell Using Magic Layout and Cell characterization :
 
+Tasks:
+   1. Clone custom inverter standard cell design from github repository: Standard cell design and characterization using OpenLANE flow.
+   2. Load the custom inverter layout in magic and explore.
+   3. Spice extraction of inverter in magic.
+   4. Editing the spice model file for analysis through simulation.
+   5. Post-layout ngspice simulations.
+   6. Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
 
+## 1. Clone custom inverter standard cell design from github repository
+```
+# Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Clone the repository with custom inverter design
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+
+# Change into repository directory
+cd vsdstdcelldesign
+
+# Copy magic tech file to the repo directory for easy access
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+
+# Check contents whether everything is present
+ls
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_inv.mag &
+```
+![cmnd_screenshot](https://github.com/user-attachments/assets/1e2a4c1e-4db2-4bdc-9b17-49c01f539367)
+
+----
+2. Load the custom inverter layout in magic and explore.
+
+Screenshot of custom inverter layout in magic
+![inverter](https://github.com/user-attachments/assets/54a491b3-c6f8-4781-8dde-b9d9e74b2940)
+
+NMOS PMOS identified
+
+![nmos_pmos](https://github.com/user-attachments/assets/475f4284-1df2-4625-8622-86cded645ce8)
+
+Output Y connectivity to PMOS and NMOS drain verified
+![y](https://github.com/user-attachments/assets/a823a38d-e200-4837-97ff-d693af8d69c7)
+
+PMOS source connectivity to VDD (here VPWR) verified
+
+![pwr](https://github.com/user-attachments/assets/429c56f5-ce31-4b95-b41a-f5d1e91b6e35)
+
+NMOS source connectivity to VSS (here VGND) verified
+![gnd](https://github.com/user-attachments/assets/c37f8a0f-ef27-4e4b-b791-34baa26b5ba8)
+
+Deleting necessary layout part to see DRC error
+
+![drc_err](https://github.com/user-attachments/assets/01fb9050-ecaf-4ed1-9551-2abe17c56dc5)
+
+-----
+3.Spice extraction of inverter in magic.
+
+Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
+```
+# Check current directory
+pwd
+
+# Extraction command to extract to .ext format
+extract all
+
+# Before converting ext to spice this command enable the parasitic extraction also
+ext2spice cthresh 0 rthresh 0
+
+# Converting to ext to spice
+ext2spice
+```
+Screenshot of tkcon window after running above commands
+
+![spice_netlist_cmnds](https://github.com/user-attachments/assets/d39416fa-214f-41ac-84e0-c3faa7bbfda6)
+
+Screenshot of created spice file
+![spice_file](https://github.com/user-attachments/assets/5199af94-7b0b-4085-851a-d22ea6c9eaa4)
+
+------
+4. Editing the spice model file for analysis through simulation.
+
+Measuring unit distance in layout grid
+
+![reading_grid](https://github.com/user-attachments/assets/d678af19-58f1-4bab-81ce-c0f86b744894)
+
+Final edited spice file ready for ngspice simulation
+
+![edited_netlist](https://github.com/user-attachments/assets/0446061b-3592-45cc-99e8-c6cf18052be2)
+
+----
+5. Post-layout ngspice simulations.
+   
+Commands for ngspice simulation
+```
+# Command to directly load spice file for simulation to ngspice
+ngspice sky130_inv.spice
+
+# Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
+plot y vs time a
+```
+Screenshots of ngspice run
+
+
+Screenshot from 2024-03-19 00-34-11
 ----
 ## Day4: Pre-Layout timing analysis and Importance of good clock tree :
 
