@@ -40,7 +40,7 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
 12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoC](#Static-Timing-Analysis-(STA)-of-VSDBabySoC)
 13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
-14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Advanced-Physical-Design-Using-Openlane/Sky130-Wokshop)
+14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Lab13:)
     
     * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA,-OpenLANE-and-Sky130-PDK)
     * [Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
