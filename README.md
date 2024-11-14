@@ -42,11 +42,11 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
 14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Lab13-Advanced-Physical-Design-Using-OpenlaneSky130-Wokshop)
     
-    * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA-OpenLANE-and-Sky130-PDK)
-    * [Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
-    * [Day3: Design Library Cell Using Magic Layout and Cell characterization](#Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
-    * [Day4: Pre-Layout timing analysis and Importance of good clock tree](#Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
-    * [Day5: Final steps for RTL2GDS using tritonRoute and openSTA](#Final-steps-for-RTL2GDS-using-tritonRoute-and-openSTA)
+    * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Day1-Inception-of-open-source-EDA-OpenLANE-and-Sky130-PDK)
+    * [Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Day2-Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
+    * [Day3: Design Library Cell Using Magic Layout and Cell characterization](#Day3-Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
+    * [Day4: Pre-Layout timing analysis and Importance of good clock tree](#Day4-Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
+    * [Day5: Final steps for RTL2GDS using tritonRoute and openSTA](#Day5-Final-steps-for-RTL2GDS-using-tritonRoute-and-openSTA)
         
 - [References](#References)
   
@@ -4420,8 +4420,7 @@ ASIC design is a complex step that involves tons of steps, various methodologies
 ![image](https://github.com/user-attachments/assets/8ab63b14-c047-488f-adb9-e401c4ce72cc)
 
 ----
-**Day1:**
-## Inception of open-source EDA, OpenLANE and Sky130 PDK:
+## Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK:
 
 Tasks:
 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
@@ -4486,9 +4485,7 @@ Calculation of Flop Ratio and DFF % from synthesis statistics report file
         Percentage of Flip Flops = 0.108429685 ∗ 100 = 10.84296854%
 	
 -----
-**Day2:**
-
-## Good Floorpan vs Bad Floorplan and Introduction to Library Cell:
+## Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell:
 -----
 Tasks:
 
@@ -4619,8 +4616,8 @@ exit
 ```
 
 -----
-**Day3:**
-## Design Library Cell Using Magic Layout and Cell characterization:
+
+## Day3: Design Library Cell Using Magic Layout and Cell characterization:
 
 Tasks:
    1. Clone custom inverter standard cell design from github repository: Standard cell design and characterization using OpenLANE flow.
@@ -4845,8 +4842,9 @@ Screenshot of magic window with rule implemented
 
 
 ----
-**Day4:**
-## Pre-Layout timing analysis and Importance of good clock tree:
+
+## Day4: Pre-Layout timing analysis and Importance of good clock tree:
+
 **Theory**
 
 **Implementation**
@@ -5540,14 +5538,13 @@ Screenshots of commands run and timing report generated
 
 ![6](https://github.com/user-attachments/assets/d41457b7-04c4-4e6e-a5d4-065bc8812822)
 
+------
 
-
-
-**Day5:**
-## Final steps for RTL2GDS using tritonRoute and openSTA:
+## Day5: Final steps for RTL2GDS using tritonRoute and openSTA:
 
 **Maze Routing and Lee's algorithm**
 ------
+
 Routing is the process of establishing a physical connection between two pins. Algorithms designed for routing take source and target pins and aim to find the most efficient path between them, ensuring a valid connection exists.
 
 The Maze Routing algorithm, such as the Lee algorithm, is one approach for solving routing problems. In this method, a grid similar to the one created during cell customization is utilized for routing purposes. The Lee algorithm starts with two designated points, the source and target, and leverages the routing grid to identify the shortest or optimal route between them.
