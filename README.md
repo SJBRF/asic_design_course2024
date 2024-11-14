@@ -4280,7 +4280,7 @@ From the table, we have plotted the below graphs:
 * Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 -----
-## Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop:
+# Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop:
 
 ## Theory:
 
@@ -4436,7 +4436,9 @@ The percentage of Flop Ratio = Flop Ratio * 100
 
 ## 1. Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
 --------
+
 Commands to invoke the OpenLANE flow and perform synthesis
+
 ```
 # Change directory to openlane flow directory
 cd Desktop/work/tools/openlane_working_dir/openlane
@@ -5025,7 +5027,7 @@ Commands to view and change parameters to improve timing and run synthesis
 
 ```
 # Now once again we have to prep design so as to update variables
-prep -design picorv32a -tag 11-11_16-58 -overwrite
+prep -design picorv32a -tag 12-11_17-13 -overwrite
 
 # Addiitional commands to include newly added lef to openlane flow merged.lef
 set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
