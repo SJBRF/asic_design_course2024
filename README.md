@@ -40,9 +40,9 @@ Labs done as a part of the Asic Design course in IIITB  aug-dec 2024 term.
 11. [Lab 10: Synthesis of RISC-V using yosys and Post synthesis simulation of Babysoc using iverilog GTKwave](#Synthesis-of-RISC-V-using-yosys-and-Post-synthesis-simulation-of-Babysoc-using-iverilog-GTKwave)
 12. [Lab 11: Static Timing Analysis (STA) of VSDBabySoC](#Static-Timing-Analysis-(STA)-of-VSDBabySoC)
 13. [Lab 12: Synthesize VsdBabySoC design using different PVT Corner Library Files](#Synthesize-VsdBabySoC-design-using-different-PVT-Corner-Library-Files)
-14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Lab13:)
+14. [Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop](#Lab13-Advanced-Physical-Design-Using-OpenlaneSky130-Wokshop)
     
-    * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA,-OpenLANE-and-Sky130-PDK)
+    * [Day1: Inception of open-source EDA, OpenLANE and Sky130 PDK](#Inception-of-open-source-EDA-OpenLANE-and-Sky130-PDK)
     * [Day2: Good Floorpan vs Bad Floorplan and Introduction to Library Cell](#Good-Floorpan-vs-Bad-Floorplan-and-Introduction-to-Library-Cell)
     * [Day3: Design Library Cell Using Magic Layout and Cell characterization](#Design-Library-Cell-Using-Magic-Layout-and-Cell-characterization)
     * [Day4: Pre-Layout timing analysis and Importance of good clock tree](#Pre-Layout-timing-analysis-and-Importance-of-good-clock-tree)
@@ -4280,8 +4280,7 @@ From the table, we have plotted the below graphs:
 * Worst hold slack - sky130_fd_sc_hd__ff_n40C_1v95 PVT Corner library file
 
 -----
-## Lab13: 
-## Advanced Physical Design Using Openlane/Sky130 Wokshop
+## Lab13: Advanced Physical Design Using Openlane/Sky130 Wokshop:
 
 ## Theory:
 
