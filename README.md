@@ -4872,6 +4872,7 @@ magic -T sky130A.tech sky130_inv.mag &
 cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
 
 # Command to open custom inverter layout in magic
+```
 magic -T sky130A.tech sky130_inv.mag &
 ```
 Screenshot of tracks.info of sky130_fd_sc_hd
@@ -4912,7 +4913,7 @@ Condition 3 verified
 			Height of the standard cell = 0.34 ∗ 8 = 2.72um 
 
 
-## 2. Save the finalized layout with custom name and open it.
+**2. Save the finalized layout with custom name and open it.**
 
 Command for tkcon window to save the layout with custom name
 ```
@@ -4941,7 +4942,7 @@ lef write
 
 ![1](https://github.com/user-attachments/assets/82458630-108c-4147-be38-cfc139eb7669)
 
-## 4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+**4. Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.**
 
 Commands to copy necessary files to 'picorv32a' design 'src' directory
 
@@ -4962,7 +4963,7 @@ Screenshot of commands run
 
 ![1](https://github.com/user-attachments/assets/a7c6aae6-9f67-4a05-9395-3e8f1e520c58)
 
-## 5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+**5. Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.**
 
 Commands to be added to config.tcl to include our custom cell in the openlane flow
 ```
@@ -4978,7 +4979,7 @@ Edited config.tcl to include the added lef and change library to ones we added i
 
 ![1](https://github.com/user-attachments/assets/f1590e86-3140-4763-b9b3-805c6c694275)
 
-## 6. Run openlane flow synthesis with newly inserted custom inverter cell.
+**6. Run openlane flow synthesis with newly inserted custom inverter cell.**
 
 Commands to invoke the OpenLANE flow include new lef and perform synthesis
 
@@ -5016,7 +5017,7 @@ Screenshots of commands run
 
 ![3](https://github.com/user-attachments/assets/8820a08b-d960-4ce6-ad8a-93033710f22a)
 
-## 7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+**7. Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.**
 
 Noting down current design values generated before modifying parameters to improve timing
 
@@ -5071,7 +5072,7 @@ Comparing to previously noted run values area has increased and worst negative s
 ![term 5](https://github.com/user-attachments/assets/cc23dc1f-59f0-4fb9-ae1c-68da7c8ccb06)
 
 
-## 8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+**8. Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.**
 
 Now that our custom inverter is properly accepted in synthesis we can now run floorplan using following command
 
@@ -5133,7 +5134,7 @@ Abutment of power pins with other cell from library clearly visible
 
 ![magic 5](https://github.com/user-attachments/assets/7df68330-3799-4086-86cb-e865ac3788d9)
 
-## 9. Do Post-Synthesis timing analysis with OpenSTA tool.
+**9. Do Post-Synthesis timing analysis with OpenSTA tool.**
 
 Since we are having 0 wns after improved timing run we are going to do timing analysis on initial run of synthesis which has lots of violations and no parameters were added to improve timing
 
@@ -5224,7 +5225,7 @@ Commands run final screenshot
 
 ![2](https://github.com/user-attachments/assets/159e5223-4e7e-4d42-a87d-2a93bf8ce739)
 
-## 10. Make timing ECO fixes to remove all violations.
+**10. Make timing ECO fixes to remove all violations.**
 
 OR gate of drive strength 2 is driving 4 fanouts
 
@@ -5310,7 +5311,7 @@ Result - slack reduced
 
 We started ECO fixes at wns -35.45 and now we stand at wns -34.1833 we reduced around 1.2667 ns of violation
 
-## 11. Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+**11. Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.**
 
 Now to insert this updated netlist to PnR flow and we can use write_verilog and overwrite the synthesis netlist but before that we are going to make a copy of the old old netlist
 
@@ -5397,7 +5398,7 @@ Screenshots of commands run
 
 ![7](https://github.com/user-attachments/assets/b49b65ab-d122-4ca6-80e4-642202eac317)
 
-## 12. Post-CTS OpenROAD timing analysis.
+**12. Post-CTS OpenROAD timing analysis.**
 
 Commands to be run in OpenLANE flow to do OpenROAD timing analysis with integrated OpenSTA in OpenROAD
 ```
@@ -5449,7 +5450,7 @@ Screenshots of commands run and timing report generated
 ![3](https://github.com/user-attachments/assets/65a67330-d9e2-4fdf-bee3-9f49e2bf7a15)
 
 
-## 13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
+**13. Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.**
 
 Commands to be run in OpenLANE flow to do OpenROAD timing analysis after changing CTS_CLK_BUFFER_LIST
 
