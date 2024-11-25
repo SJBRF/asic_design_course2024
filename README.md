@@ -7583,6 +7583,7 @@ Total                  9.61e-03   6.28e-03   3.60e-08   1.59e-02 100.0%
                           60.5%      39.5%       0.0%
 ```
 
+![cts_gui](https://github.com/user-attachments/assets/2f0c9ff6-55b0-4e88-bbf9-51573cd5d188)
 
 
 ## References
