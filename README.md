@@ -7585,8 +7585,6 @@ Total                  9.61e-03   6.28e-03   3.60e-08   1.59e-02 100.0%
 
 
 
-
-
 ## References
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
