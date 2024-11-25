@@ -6403,7 +6403,7 @@ gedit designs/nangate45/gcd/metadata-base-ok.json
 ![final_gui](https://github.com/user-attachments/assets/7ab4aac4-cb36-4c5d-a3ee-bebb8eb065e2)
 
 
-**Using above flow and commands we ran automated RTL2GDS flow for physical design of VSDbabysoc:**
+## **Using above flow and commands we ran automated RTL2GDS flow for physical design of VSDbabysoc:**
 
 Initial Steps:
 
@@ -6420,6 +6420,50 @@ Initial Steps:
 avsdpll 200 1200 N
 avsddac 300 -100 N
 ```
+
+**Config.mk File used for PD:**
+
+```
+export DESIGN_NICKNAME = VSDbabysoc_pri
+export DESIGN_NAME = vsdbabysoc
+export PLATFORM    = sky130hd
+
+
+export VSDbabysoc_pri_DIR = $(DESIGN_HOME)/$(PLATFORM)/$(DESIGN_NICKNAME)
+
+export VERILOG_FILES =  $(sort $(wildcard $(DESIGN_HOME)/src/$(DESIGN_NICKNAME)/*.v \
+	 $(DESIGN_HOME)/src/$(DESIGN_NICKNAME)/vsdbabysoc.v \
+	 ))
+	 
+export VERILOG_INCLUDE_DIRS = $(DESIGN_HOME)/src/$(DESIGN_NICKNAME)/include
+export SDC_FILE      = $(wildcard $(DESIGN_HOME)/$(PLATFORM)/$(DESIGN_NICKNAME)/constraints.sdc)
+export ADDITIONAL_LEFS = $(wildcard $(VSDbabysoc_pri_DIR)/avsddac.lef) \
+			$(wildcard $(VSDbabysoc_pri_DIR)/avsdpll.lef)
+export ADDITIONAL_LIBS = $(wildcard $(VSDbabysoc_pri_DIR)/lib/*.lib)
+export ADDITIONAL_GDS  = $(wildcard $(VSDbabysoc_pri_DIR)/gds)
+
+
+export PLACE_OPT_CONGESTION_DRIVEN = 1
+
+export FP_PIN_ORDER_CFG = $(wildcard $ (VSDbabysoc_pri_DIR)/pin_order.cfg)
+export FP_SIZING = absolute
+export DIE_AREA = 0 0 2000 2000
+export CORE_AREA = 10 10 1900 1900
+
+export global_pins_spacing = 5
+
+export MACRO_PLACEMENT = $(VSDbabysoc_pri_DIR)/macro.cfg
+
+export RTLMP_BOUNDARY_WT = 0
+export MACRO_PLACE_HALO = 200 200
+export MACRO_PLACE_CHANNEL = 250 250
+
+export PLACE_DENSITY_LB_ADDON = 0.3
+
+export REMOVE_ABC_BUFFERS = 1
+```
+
+
 **Step1: Synthesis and Floorplanning:**
 
 	In VLSI design, Floorplanning is a crucial step in physical design that involves placing blocks and macros in the chip or core area.
