@@ -7585,8 +7585,16 @@ Total                  9.61e-03   6.28e-03   3.60e-08   1.59e-02 100.0%
 
 ![cts_gui](https://github.com/user-attachments/assets/2f0c9ff6-55b0-4e88-bbf9-51573cd5d188)
 
+**Heat Map:**
+
+![heatmap](https://github.com/user-attachments/assets/3a217f42-4ad6-4636-9b39-72e7df5186da)
+
+**Routing Congestion and IO nets:**
+![routing_congestion](https://github.com/user-attachments/assets/acf09520-8a68-4d44-9f0e-b88b763b19bf)
+
 
 ## References
+
 
 *  https://forgefunder.com/~kunal/riscv_workshop.vdi
 *  https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
