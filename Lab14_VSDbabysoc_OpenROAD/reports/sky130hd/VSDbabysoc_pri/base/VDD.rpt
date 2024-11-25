@@ -1,0 +1,105 @@
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (201.8150, 1207.2300) - (201.8150, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (202.8700, 1206.1800) - (202.8700, 1206.1800) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (202.8700, 1206.5100) - (202.8700, 1206.5100) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (203.3450, 1207.2300) - (203.3450, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (204.8450, 1206.5300) - (204.8450, 1206.5300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (206.0050, 1207.2300) - (206.0050, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (206.8950, 1206.5100) - (206.8950, 1206.5100) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (208.7350, 1207.2300) - (208.7350, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (209.8450, 1207.2300) - (209.8450, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (212.2250, 1207.2300) - (212.2250, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (213.7550, 1207.2300) - (213.7550, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (215.1700, 1206.6050) - (215.1700, 1206.6050) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (216.4150, 1207.2300) - (216.4150, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (218.9000, 1206.6800) - (218.9000, 1206.6800) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (219.1450, 1207.2300) - (219.1450, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (220.1500, 1206.5300) - (220.1500, 1206.5300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (220.2550, 1207.2300) - (220.2550, 1207.2300) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (223.5300, 1207.2100) - (223.5300, 1207.2100) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (225.4350, 1204.7650) - (225.4350, 1204.7650) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (234.0250, 1209.5850) - (234.0250, 1209.5850) on Layer li1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (200.3100, 1206.9200) - (200.3100, 1206.9200) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (200.3200, 1207.0050) - (200.3200, 1207.0050) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (201.0100, 1207.0050) - (201.0100, 1207.0050) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (205.6750, 1206.8600) - (205.6750, 1206.8600) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (210.3400, 1206.6200) - (210.3400, 1206.6200) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (211.4300, 1206.6200) - (211.4300, 1206.6200) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (216.0900, 1206.8600) - (216.0900, 1206.8600) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (220.7500, 1206.7050) - (220.7500, 1206.7050) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (221.1400, 1206.7050) - (221.1400, 1206.7050) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (224.2850, 1206.8600) - (224.2850, 1206.8600) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (227.4300, 1206.8600) - (227.4300, 1206.8600) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (228.1300, 1204.7700) - (228.1300, 1204.7700) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (228.1300, 1206.8600) - (228.1300, 1206.8600) on Layer met1
+violation type: Unconnected node
+	srcs: net:VDD
+	bbox = (229.3300, 1207.1000) - (229.3300, 1207.1000) on Layer met1
+violation type: Unconnected instance
+	srcs: inst:avsdpll
+	bbox = (200.0000, 1200.0000) - (236.1800, 1213.7100) on Layer -
