@@ -7691,22 +7691,23 @@ make DESIGN_CONFIG=./designs/sky130hd/VSDbabysoc_pri/config.mk route
 
 
 Screenshot of GUI of routed design:
-all macro cells:
+**all macro cells:**
 
 ![route_with_cts](https://github.com/user-attachments/assets/f7d5e82a-604f-49da-9551-42224f5aa658)
 
-Riscv macro:
+**riscv_pri macro:**
 
 ![route_riscv](https://github.com/user-attachments/assets/eb7d0fde-ed28-4a2d-a57b-5f3c244bf27f)
 
-Heat map for routing congestion:
-![heatmap](https://github.com/user-attachments/assets/d46d615c-8cb2-4115-bbe4-b3a02a00cae7)
+**Heat map for routing congestion:**
 
-Heat map for placement congestion
+![heat_map_gui](https://github.com/user-attachments/assets/93680564-cf33-4d65-a898-e26c54cf1f41)
+
+**Heat map for placement congestion:**
 
 ![Heat_map_placement](https://github.com/user-attachments/assets/b82f8003-4796-44d7-b295-86dfe4aa2c36)
 
-Routing reports:
+**Routing reports:**
 
 ```
 
