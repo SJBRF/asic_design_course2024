@@ -6241,7 +6241,7 @@ The biggest challenge is to form a single-crystalline semiconductors on a non-pl
 
 
 
-**2. Tool INstallation:**
+**2. Tool Installation:**
 
 **Commands to install openroad:**
 ```
@@ -6403,7 +6403,7 @@ gedit designs/nangate45/gcd/metadata-base-ok.json
 ![final_gui](https://github.com/user-attachments/assets/7ab4aac4-cb36-4c5d-a3ee-bebb8eb065e2)
 
 
-**5. Automated RTL2GDS for VSDbabysoc:**
+**Using above flow and commands we ran automated RTL2GDS flow for physical design of VSDbabysoc:**
 
 Initial Steps:
 
